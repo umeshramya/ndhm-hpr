@@ -17,7 +17,7 @@ const register = async ()=>{
             "type" : "HIP"
         })
 
-    let patient = new Patient(baseUrl)
+    let patient = new Patient("https://dev.ndhm.gov.in/")
     await patient.hipVerifyPatinetByHealthId(accesstoken, " umeshbilagi@sbx", "jjh_123", "HRP")
 }
 

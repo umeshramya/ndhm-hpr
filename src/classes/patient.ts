@@ -19,17 +19,31 @@ export default class Patient{
         console.log(new Date().toISOString())
         const body = JSON.stringify(
             {
-                "requestId": `"${uuidv4()}"`,
-                "timestamp": `"${new Date().toISOString()}"`,
+                "requestId": "5f7a535d-a3fd-416b-b069-c97d021fbacd",
+                "timestamp": "2021-10-15T18:19:24.172Z",
                 "query": {
-                  "id": `"${healthId}"`,
+                  "id": "hinapatel79@ndhm",
                   "purpose": "LINK",
                   "requester": {
-                    "type": `"${hipType}"`,
-                    "id": `"${hipId}"`
+                    "type": "HIP",
+                    "id": "100005"
                   }
                 }
               }
+
+
+            // {
+            //     "requestId": `"${uuidv4()}"`,
+            //     "timestamp": `"${new Date().toISOString()}"`,
+            //     "query": {
+            //       "id": `"${healthId}"`,
+            //       "purpose": "LINK",
+            //       "requester": {
+            //         "type": `"${hipType}"`,
+            //         "id": `"${hipId}"`
+            //       }
+            //     }
+            //   }
         //     {
         //     "requestId": `${uuidv4()}`,
         //     "timestamp": `${}`,
