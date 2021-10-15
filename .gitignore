@@ -102,3 +102,16 @@ dist
 
 # TernJS port file
 .tern-port
+
+# dotenv environment variables file
+.env
+
+# yalc/
+yalc/
+#yalc-lock
+yalc-lock
+
+test/yalc
+test/yalc-lock
+
+lib

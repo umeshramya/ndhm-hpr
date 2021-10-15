@@ -1,4 +1,4 @@
-import { request } from "request";
+import request from "request"
 
 export default class Register{
     private clientID:string;
@@ -49,7 +49,7 @@ export default class Register{
      * @param endPointUrl this HIP endpoint URL
      * @returns 
      */
-    cupdateHealthcareUrl =async (accessToken:string, endPointUrl:string):Promise<any> => {
+    updateHealthcareUrl =async (accessToken:string, endPointUrl:string):Promise<any> => {
         const url = `${this.baseUrl}devservice/v1/bridges`
         const headers = {
             "Content-Type": "application/json",
@@ -77,13 +77,13 @@ export default class Register{
     }
     
     
-     registerfacility = async (accessToken:string, config:{
+     registerFacility = async (accessToken:string, config:{
         "id": string;
         "name": string
         "type": string
         "active": boolean
         "alias": []
-    }) => {
+    }):Promise<any> => {
         const body = JSON.stringify(config)
     
         const url = `${this.baseUrl}devservice/v1/bridges/services`
