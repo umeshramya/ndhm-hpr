@@ -18,7 +18,7 @@ const register = async ()=>{
         })
 
     let patient = new Patient(baseUrl)
-    await patient.hipVerifyPatinetByHealthId(accesstoken, "umeshbilagi@sbx", "jjh_123", "HIP")
+    await patient.hipVerifyPatinetByHealthId(accesstoken, " umeshbilagi@sbx", "jjh_123", "HRP")
 }
 
 register();
