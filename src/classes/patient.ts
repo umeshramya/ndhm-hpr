@@ -9,20 +9,24 @@ export default class Patient{
 
     hipVerifyPatinetByHealthId = async (accessToken:string, healthId:string, hipId:string, hipType:string):Promise<any>=>{
         const url = `${this.baseUrl}gateway/v0.5/users/auth/fetch-modes`;
+        console.log(accessToken)
+        
         const headers = {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${accessToken}`
         }
+
+        console.log(new Date().toISOString())
         const body = JSON.stringify(
             {
-                "requestId": "5f7a535d-a3fd-416b-b039-c97d021fbacd",
-                "timestamp": "2021-10-15T16:54:51.817Z",
+                "requestId": `"${uuidv4()}"`,
+                "timestamp": `"${new Date().toISOString()}"`,
                 "query": {
-                  "id": "umeshbilagi@ndhm",
-                  "purpose": "KYC",
+                  "id": `"${healthId}"`,
+                  "purpose": "LINK",
                   "requester": {
-                    "type": "HIP",
-                    "id": "100002"
+                    "type": `"${hipType}"`,
+                    "id": `"${hipId}"`
                   }
                 }
               }
