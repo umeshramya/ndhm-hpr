@@ -47,7 +47,7 @@ export default class Register{
      * 
      * @param accessToken access token
      * @param endPointUrl this HIP endpoint URL
-     * @returns 
+     * @returns Promise
      */
     updateHealthcareUrl =async (accessToken:string, endPointUrl:string):Promise<any> => {
         const url = `${this.baseUrl}devservice/v1/bridges`
@@ -68,7 +68,7 @@ export default class Register{
                     if (err) {
                         reject(err)
                     } else {
-                        console.log(res.statusCode)
+                       
                         resolve(res)
                     }
                 }
@@ -76,7 +76,12 @@ export default class Register{
         })
     }
     
-    
+    /**
+     * 
+     * @param accessToken accessToken
+     * @param config config for organization
+     * @returns Promise
+     */
      registerFacility = async (accessToken:string, config:{
         "id": string;
         "name": string
@@ -104,7 +109,7 @@ export default class Register{
                     if (err) {
                         reject(err)
                     } else {
-                        console.log(res.statusCode)
+                  
                         resolve(res)
                     }
                 }
