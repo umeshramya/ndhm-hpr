@@ -1,11 +1,11 @@
 import request from "request";
-import uuid from "uuid"
+import { v4 as uuidv4 } from 'uuid';
 
 export default class Patient{
-private baseUrl:string;
-constructor(_baseUrl:string){
-    this.baseUrl=_baseUrl
-}
+    private baseUrl:string;
+    constructor(_baseUrl:string){
+        this.baseUrl=_baseUrl
+    }
 
     hipVerifyPatinetByHealthId = async (accessToken:string, healthId:string, hipId:string, hipType:string):Promise<any>=>{
         const url = `${this.baseUrl}gateway/v0.5/users/auth/on-fetch-modes`;
@@ -14,7 +14,7 @@ constructor(_baseUrl:string){
             "Authorization": `Bearer ${accessToken}`
         }
         const body = JSON.stringify({
-            "requestId": `${uuid.v4()}`,
+            "requestId": `${uuidv4()}`,
             "timestamp": `${new Date().toISOString()}`,
             "query": {
                 "id": healthId,
