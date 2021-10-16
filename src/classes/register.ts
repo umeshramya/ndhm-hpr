@@ -109,7 +109,6 @@ export default class Register{
                     if (err) {
                         reject(err)
                     } else {
-                  
                         resolve(res)
                     }
                 }

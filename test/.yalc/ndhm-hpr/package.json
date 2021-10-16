@@ -1,12 +1,13 @@
 {
   "name": "ndhm-hpr",
-  "version": "1.0.1+c8d3a06d",
+  "version": "1.0.1+d712ad7b",
   "description": "This is ndhm-hpr",
   "main": "lib/index.js",
   "directories": {
     "test": "test"
   },
   "dependencies": {
+    "axios": "^0.23.0",
     "moment": "^2.29.1",
     "request": "^2.88.2",
     "uuid": "^8.3.2"
@@ -31,5 +32,5 @@
   "files": [
     "lib/**/*"
   ],
-  "yalcSig": "c8d3a06d8ab65ca69f3d98c39e43d0d7"
+  "yalcSig": "d712ad7bfad7b15196eb6771eee1f720"
 }
