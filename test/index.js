@@ -3,7 +3,7 @@ const dotenv = require("dotenv").config()
 
 const register = async () => {
     const baseUrl = "https://dev.abdm.gov.in/"
-    const endpointUrl = "https://webhook.site/e8f2282a-2813-4ad8-8229-9a45ba44597b"
+    const endpointUrl = "https://webhook.site/a9aa7f1b-36cb-4378-ab0f-50586e8e0e67"
     const register = new Register(process.env.CLIENT_ID, process.env.CLIENT_SECRET, baseUrl);
 
     const accesstoken = (await register.getAccessToken().then(res => JSON.parse(res))).accessToken
