@@ -2,6 +2,8 @@ import moment from "moment";
 import request from "request";
 import { v4 as uuidv4 } from 'uuid';
 import axios  from "axios";
+import Request from "./request";
+import { Register } from "..";
 
 export default class Patient {
     private baseUrl: string;
@@ -29,24 +31,12 @@ export default class Patient {
 
             }
         }
-   
-        const body = JSON.stringify(requestBody)
-        return new Promise((resolve, reject) => {
-            request(url, {
-                headers: headers,
-                body: body,
-                method: "POST"
-            },
-                (err, res) => {
-                    if (err) {
-                        reject(err)
-                    } else {
-                        console.log(res.statusCode)
-                        resolve(res)
-                    }
-                }
-            )
+
+        return await new Request().request({
+            "headers" : headers, "method" : "POST", "requestBody" : requestBody, "url" : url
         })
+   
+
     
         }
 

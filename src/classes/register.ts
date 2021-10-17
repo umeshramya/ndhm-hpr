@@ -1,4 +1,5 @@
 import request from "request"
+import Request  from "./request";
 
 export default class Register{
     private clientID:string;
@@ -16,30 +17,19 @@ export default class Register{
      * @returns return access token in promise
      */
     getAccessToken = async():Promise<any> => {
-        const body = JSON.stringify({
+        const body = {
             "clientId": this.clientID,
             "clientSecret": this.clinetSecrete
-        })
+        }
     
         const url = `${this.baseUrl}gateway/v0.5/sessions`
         const headers = {
             "Content-Type": "application/json"
         }
-    
-        return new Promise((resolve, reject) => {
-            request(url, {
-                "body": body,
-                "method": "post",
-                "headers": headers
-            }, (err:any, res:any) => {
-                if (err) {
-                    reject(err)
-                } else {
-                    resolve(res.body)
-                }
-            })
-        })
-    
+        
+        return new Request().request({
+            "headers" : headers, "url" : url, "requestBody" : body, "method" : "POST"
+        }).then(res=>res.body)
     
     }
 
@@ -55,25 +45,12 @@ export default class Register{
             "Content-Type": "application/json",
             "Authorization": `Bearer ${accessToken}`
         }
-        const body = JSON.stringify({ url: endPointUrl })
-    
-        return new Promise((resolve, reject) => {
-            request(url, {
-                headers: headers,
-                body: body,
-                method: "PATCH"
-    
-            },
-                (err, res) => {
-                    if (err) {
-                        reject(err)
-                    } else {
-                       
-                        resolve(res)
-                    }
-                }
-            )
+        const body = { url: endPointUrl }
+
+        return new Request().request({
+            "headers" : headers, "requestBody" : body, method : "PATCH", "url" : url
         })
+    
     }
     
     /**
@@ -89,7 +66,7 @@ export default class Register{
         "active": boolean
         "alias": []
     }):Promise<any> => {
-        const body = JSON.stringify(config)
+        const body = config
     
         const url = `${this.baseUrl}devservice/v1/bridges/services`
     
@@ -97,23 +74,12 @@ export default class Register{
             "Content-Type": "application/json",
             "Authorization": `Bearer ${accessToken}`
         }
-    
-        return new Promise((resolve, reject) => {
-            request(url, {
-                headers: headers,
-                body: body,
-                method: "PUT"
-    
-            },
-                (err, res) => {
-                    if (err) {
-                        reject(err)
-                    } else {
-                        resolve(res)
-                    }
-                }
-            )
+
+        
+        return new Request().request({
+            "headers" : headers, "requestBody" : body, method : "PUT", "url" : url
         })
+    
     
     
     }
