@@ -11,22 +11,22 @@ export default class Patient {
         this.baseUrl = _baseUrl
     }
 
-    hipVerifyPatinetByHealthId = async (accessToken: string, healthId: string, hipId: string, hipType: string): Promise<any> => {
+    hipVerifyPatinetByHealthId = async (config:{accessToken: string, healthId: string, hipId: string, hipType: string, purpose : string, xCmId: "sbx" | "ndhm" }): Promise<any> => {
         const url = `${this.baseUrl}gateway/v0.5/users/auth/fetch-modes`;
         const headers = {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${accessToken}`,
-            "X-CM-ID": "sbx"
+            "Authorization": `Bearer ${config.accessToken}`,
+            "X-CM-ID": config.xCmId
         }
         const requestBody = {
             "requestId": uuidv4(),
             "timestamp":  new Date().toISOString(),
             "query": {
-                "id": healthId,
-                "purpose": "LINK",
+                "id": config.healthId,
+                "purpose": config.purpose,
                 "requester": {
-                    "type": hipType,
-                    "id": hipId
+                    "type": config.hipType,
+                    "id": config.hipId
                 }
 
             }
@@ -39,5 +39,61 @@ export default class Patient {
 
     
         }
+     hipPatientInit= async (config:{accessToken: string, healthId: string, hipId: string, hipType: string, purpose : string, xCmId:"sbx" | "ndhm", authMode :   "MOBILE_OTP"| "DEMOGRAPHICS" |"AADHAAR_OTP"}):Promise<any> =>{
+         const url = `${this.baseUrl}gateway/v0.5/users/auth/init`
+        const headers = {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${config.accessToken}`,
+            "X-CM-ID": config.xCmId
+        }
+        const body= {
+            "requestId": uuidv4(),
+            "timestamp":  new Date().toISOString(),
+              "query": {
+                "id": config.healthId,
+                "purpose": config.purpose,
+                "authMode": config.authMode,
+                "requester": {
+                  "type": config.hipType,
+                  "id": config.hipId
+                }
+              }
+            }
+
+            return await new Request().request({
+                "headers" : headers, "method" : "POST", "requestBody" : body, "url" : url
+            })
+    }
+
+
+    hipAuthConfirm = async (config : {accessToken: string, xCmId: "sbx" | "ndhm", transactionId: string, authCode : string })=>{
+        const url = `${this.baseUrl}gateway/v0.5/users/auth/confirm`
+        const headers = {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${config.accessToken}`,
+            "X-CM-ID": config.xCmId
+        }
+
+        const body ={
+            "requestId": uuidv4(),
+            "timestamp":  new Date().toISOString(),
+            "transactionId": config.transactionId,
+            "credential": {
+              "authCode": config.authCode,
+            //   "demographic": {
+            //     "name": "janki das",
+            //     "gender": "M",
+            //     "dateOfBirth": "1972-02-29",
+            //     "identifier": {
+            //       "type": "MOBILE",
+            //       "value": "+919800083232"
+            //     }
+              }
+            }
+            return await new Request().request({
+                "headers" : headers, "method" : "POST", "requestBody" : body, "url" : url
+            })
+
+    }
 
     }

@@ -7,7 +7,7 @@ const register = async () => {
     const register = new Register(process.env.CLIENT_ID, process.env.CLIENT_SECRET, baseUrl);
 
     const accesstoken = (await register.getAccessToken().then(res => JSON.parse(res))).accessToken
-
+    console.log(accesstoken)
     await register.updateHealthcareUrl(accesstoken, endpointUrl)
     await register.registerFacility(accesstoken,
         {
@@ -19,7 +19,24 @@ const register = async () => {
         })
 
     let patient = new Patient("https://dev.ndhm.gov.in/")
-    await patient.hipVerifyPatinetByHealthId(accesstoken, "umeshbilagi@sbx", "jjh_123", "HIP")
+    await patient.hipVerifyPatinetByHealthId({
+        "accessToken" : accesstoken,
+        "healthId" : "umeshbilagi@sbx",
+        "hipId" : "jjh_123",
+        "hipType" : "HIP",
+        "purpose" : "KYC_AND_LINK",
+        "xCmId" : "sbx"
+    })
+
+    await patient.hipPatientInit({
+        "accessToken" : accesstoken,
+        "healthId" : "umeshbilagi@sbx",
+        "hipId" : "jjh_123",
+        "hipType" : "HIP",
+        "purpose" : "KYC_AND_LINK",
+        "xCmId" : "sbx",
+        "authMode" : "MOBILE_OTP"
+    })
 }
 
 register();
