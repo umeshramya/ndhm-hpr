@@ -23,7 +23,7 @@ export default class Patient {
 
     hipVerifyPatinetByHealthId = async (config: { healthId: string, hipId: string, hipType: string, purpose: string }): Promise<any> => {
         const url = `${this.baseUrl}gateway/v0.5/users/auth/fetch-modes`;
-        const requestBody = {
+        const body = {
             "requestId": uuidv4(),
             "timestamp": new Date().toISOString(),
             "query": {
@@ -37,9 +37,11 @@ export default class Patient {
             }
         }
 
-        return await new Request().request({
-            "headers": this.headers, "method": "POST", "requestBody": requestBody, "url": url
+         await new Request().request({
+            "headers": this.headers, "method": "POST", "requestBody": body, "url": url
         })
+
+        return body
 
 
 
@@ -61,13 +63,15 @@ export default class Patient {
             }
         }
 
-        return await new Request().request({
+        await new Request().request({
             "headers": this.headers, "method": "POST", "requestBody": body, "url": url
         })
+
+        return body;
     }
 
 
-    hipAuthConfirm = async (config: { transactionId: string, authCode: string }) => {
+    hipAuthConfirm = async (config: { transactionId: string, authCode ?: string }) => {
         const url = `${this.baseUrl}gateway/v0.5/users/auth/confirm`
         const headers = {
             "Content-Type": "application/json",
@@ -82,18 +86,21 @@ export default class Patient {
             "credential": {
                 "authCode": config.authCode,
                 //   "demographic": {
-                //     "name": "janki das",
-                //     "gender": "M",
-                //     "dateOfBirth": "1972-02-29",
+                //     // "name": "janki das",
+                //     // "gender": "M",
+                //     // "dateOfBirth": "1972-02-29",
                 //     "identifier": {
                 //       "type": "MOBILE",
-                //       "value": "+919800083232"
+                //       "value": "+919343403620"
                 //     }
+                //   }
             }
         }
-        return await new Request().request({
+        await new Request().request({
             "headers": headers, "method": "POST", "requestBody": body, "url": url
         })
+
+        return body
 
     }
 
@@ -118,9 +125,11 @@ export default class Patient {
             }
         }
 
-        return await new Request().request({
+        await new Request().request({
             "headers": this.headers, "method": "POST", "requestBody": body, "url": url
         })
+
+        return body
 
 
     }
