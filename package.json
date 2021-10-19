@@ -1,6 +1,6 @@
 {
-  "name": "ndhm-hpr",
-  "version": "1.0.1",
+  "name": "ndhm-hrp",
+  "version": "1.0.0",
   "description": "This is ndhm-hpr",
   "main": "lib/index.js",
   "directories": {
@@ -18,11 +18,11 @@
     "typescript": "^4.4.4"
   },
   "scripts": {
-    "dev": "tsc && yalc publish && cd test &&  yalc add ndhm-hpr &&yalc update ndhm-hpr && npm run dev"
+    "dev": "tsc && yalc publish && cd test &&  yalc add ndhm-hrp &&yalc update ndhm-hrp && npm run dev"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/umeshramya/ndhm-hpr.git"
+    "url": "git+https://github.com/umeshramya/ndhm-hrp.git"
   },
   "keywords": [
     "ndhm",
@@ -31,9 +31,9 @@
   "author": "Dr Umesh R Bilagi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/umeshramya/ndhm-hpr/issues"
+    "url": "https://github.com/umeshramya/ndhm-hrp/issues"
   },
-  "homepage": "https://github.com/umeshramya/ndhm-hpr#readme",
+  "homepage": "https://github.com/umeshramya/ndhm-hrp#readme",
   "files": [
     "lib/**/*"
   ]
