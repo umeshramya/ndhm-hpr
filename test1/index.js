@@ -18,7 +18,7 @@ const register = async () => {
             "type": "HIP"
         })
 
-    let patient = new Patient("https://dev.ndhm.gov.in/", accesstoken, "sbx")
+let patient = new Patient("https://dev.ndhm.gov.in/", accesstoken, "sbx")
 let result=    await patient.hipVerifyPatinetByHealthId({
 
         "healthId": "umeshbilagi@sbx",
@@ -28,7 +28,7 @@ let result=    await patient.hipVerifyPatinetByHealthId({
 
     })
 
-//  let result =    await patient.hipPatientInit({
+//  await patient.hipPatientInit({
 
 //         "healthId": "45-1348-0023-0587",
 //         "hipId": "jjh_123",
@@ -38,7 +38,7 @@ let result=    await patient.hipVerifyPatinetByHealthId({
 
 //     })
 
-    console.log(JSON.parse(JSON.stringify(result)))
+    // console.log(JSON.parse(JSON.stringify(result)))
 }
 
 register();
