@@ -40,11 +40,8 @@ export default class Patient {
         await new Request().request({
             "headers": this.headers, "method": "POST", "requestBody": body, "url": url
         })
-        console.log(body);
+
         return body;
-
-
-
     }
 
 
@@ -69,7 +66,6 @@ export default class Patient {
         await new Request().request({
             "headers": this.headers, "method": "POST", "requestBody": body, "url": url
         })
-
         return body;
     }
 
