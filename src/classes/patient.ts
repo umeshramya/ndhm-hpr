@@ -37,15 +37,18 @@ export default class Patient {
             }
         }
 
-         await new Request().request({
+        await new Request().request({
             "headers": this.headers, "method": "POST", "requestBody": body, "url": url
         })
-
-        return body
+        console.log(body);
+        return body;
 
 
 
     }
+
+
+
     hipPatientInit = async (config: { healthId: string, hipId: string, hipType: string, purpose: string, authMode: "MOBILE_OTP" | "DEMOGRAPHICS" | "AADHAAR_OTP" }): Promise<any> => {
         const url = `${this.baseUrl}gateway/v0.5/users/auth/init`
 
@@ -71,7 +74,7 @@ export default class Patient {
     }
 
 
-    hipAuthConfirm = async (config: { transactionId: string, authCode ?: string }) => {
+    hipAuthConfirm = async (config: { transactionId: string, authCode?: string }) => {
         const url = `${this.baseUrl}gateway/v0.5/users/auth/confirm`
         const headers = {
             "Content-Type": "application/json",

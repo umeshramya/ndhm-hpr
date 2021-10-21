@@ -4,6 +4,10 @@
     "ndhm-hpr": {
       "signature": "4c3d33d93e7cc492c3bcc56ecae1747e",
       "file": true
+    },
+    "ndhm-hrp": {
+      "signature": "90b8758b2b130fe1b8cec68edb7cfbb9",
+      "file": true
     }
   }
 }
