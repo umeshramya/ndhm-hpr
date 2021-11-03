@@ -1,5 +1,7 @@
 import Register from "./classes/register";
-import Patient from "./classes/userAuth"
+import UserAuth from "./classes/userAuth"
+import Link from "./classes/link"
+import Discovery from "./classes/discovery";
 
 
-export { Register, Patient}
+export { Register, UserAuth, Link, Discovery}

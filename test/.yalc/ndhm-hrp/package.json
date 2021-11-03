@@ -1,6 +1,6 @@
 {
   "name": "ndhm-hrp",
-  "version": "2.0.0",
+  "version": "2.0.4",
   "description": "This is ndhm-hpr",
   "main": "lib/index.js",
   "directories": {
@@ -32,5 +32,5 @@
   "files": [
     "lib/**/*"
   ],
-  "yalcSig": "93a4f6572951b26dda0e776098c60f47"
+  "yalcSig": "2b89d3e11df6efd9da41cf4e4b11d167"
 }
