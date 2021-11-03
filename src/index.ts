@@ -1,5 +1,5 @@
 import Register from "./classes/register";
-import Patient from "./classes/patient"
+import Patient from "./classes/userAuth"
 
 
 export { Register, Patient}
