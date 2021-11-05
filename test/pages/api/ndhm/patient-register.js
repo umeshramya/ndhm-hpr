@@ -1,5 +1,5 @@
 // NEXT
-import { Register, Patient } from "ndhm-hrp"
+import { Register, UserAuth} from "ndhm-hrp"
 export default async function handler(req, res) {
     const baseUrl = process.env.NDHM_URL
     const endpointUrl = process.env.NDHM_API
@@ -16,14 +16,16 @@ export default async function handler(req, res) {
             "type": "HIP"
         })
 
-    let patient = new Patient(process.env.NDHM_URL, accesstoken, "sbx")
-    let result = await patient.hipVerifyPatinetByHealthId({
-        "healthId": "umeshbilagi@sbx",
-        "hipId": "jjh_123",
-        "hipType": "HIP",
-        "purpose": "KYC_AND_LINK",
 
+
+    let userAuth = new UserAuth("", accesstoken)
+    let result = await userAuth.fetchModes({
+        "healthId" : "umeshbilagi@sbx",
+        "hipId" : "jjh_123",
+        "hipType" : "HIP",
+        "purpose" : "KYC_AND_LINK"
     })
+
 
     res.status(200).json({ result })
 
