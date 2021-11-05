@@ -3,8 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 import Request from "./request";
 
 export default class Discovery extends Header{
-    constructor(_baseUrl: string, _accessToken: string, _xCmId: "sbx" | "ndhm") {
-        super(_baseUrl, _accessToken, _xCmId)
+    constructor(_baseUrl: string, _accessToken: string) {
+        super(_baseUrl, _accessToken)
     }
 
     onDiscovery = async(config:{
@@ -40,7 +40,7 @@ export default class Discovery extends Header{
           }
 
           await new Request().request({
-            "headers": this.headers, "method": "POST", "requestBody": body, "url": url
+            "headers": this.headers(config.patientReferenceNumber), "method": "POST", "requestBody": body, "url": url
         })
 
         return body

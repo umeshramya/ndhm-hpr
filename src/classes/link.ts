@@ -3,12 +3,13 @@ import Request from "./request";
 import Header from "./header";
 
 export default class Link extends Header{
-    constructor(_baseUrl: string, _accessToken: string, _xCmId: "sbx" | "ndhm") {
-        super(_baseUrl, _accessToken, _xCmId)
+    constructor(_baseUrl: string, _accessToken: string) {
+        super(_baseUrl, _accessToken)
     }
 
-    AddContext = async (config: { careContextAccessToken: string; patientId: string; patinetDisplay: string; careContextId: string; careContextDisplay: string }) => {
+    AddContext = async (config: {healthId:string, careContextAccessToken: string; patientId: string; patinetDisplay: string; careContextId: string; careContextDisplay: string }) => {
 
+        const headers = this.headers(config.healthId)
         const url = `${this.baseUrl}gateway/v0.5/links/link/add-contexts`
         const body = {
             "requestId": uuidv4(),
@@ -29,7 +30,7 @@ export default class Link extends Header{
         }
 
         await new Request().request({
-            "headers": this.headers, "method": "POST", "requestBody": body, "url": url
+            "headers": headers, "method": "POST", "requestBody": body, "url": url
         })
 
         return body

@@ -4,25 +4,44 @@ export default class Header {
      * this is request url for gateway consent manger
      */
     public baseUrl: string ="";
+    /**
+     * cmid header in request
+     */
     public xCmId: string ="";
-    protected headers={}
+
+    /**
+     * actual header object in request
+     */
+    private headersObject={}
+    /**
+     * access token form client id and client token
+     */
     protected accessToken: string;
-    constructor( _accessToken: string) {
+
+    /**
+     * 
+     * @param baseUrl this is gateway url for sendng request
+     * @param _accessToken dervied from cleant is and client secret
+     */
+    constructor(baseUrl:string, _accessToken: string) {
         this.accessToken = _accessToken;
+        this.baseUrl=baseUrl
+
     }
     
     /**
      * header is reset from class wide variables set 
      * i.e accessToken and xCmId:
      */
-    setHeader (healthId:string){
+    headers (healthId:string):any{
         this.setXCmId(healthId)
         this.setBaseUrl(this.xCmId)
-        this.headers = {
+        this.headersObject = {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${this.accessToken}`,
             "X-CM-ID": this.xCmId
         }
+        return this.headersObject
     }
 
     /**
@@ -40,7 +59,10 @@ export default class Header {
      * @param cmidmatch the 
      */
      setBaseUrl(cmid:string){
-       this.baseUrl = X_CM_ID.filter(el=>el.id == cmid)[0].url
+       let url = X_CM_ID.filter(el=>el.id == cmid)[0].url
+       if(url){
+           this.baseUrl = url
+       }
 
     }
     /**

@@ -4,11 +4,12 @@ import Request from "./request";
 import Header from "./header";
 
 export default class UserAuth extends Header{
-    constructor(_baseUrl: string, _accessToken: string, _xCmId: "sbx" | "ndhm") {
-        super(_baseUrl, _accessToken, _xCmId)
+    constructor(_baseUrl: string, _accessToken: string) {
+        super(_baseUrl, _accessToken)
     }
 
     fetchModes= async (config: { healthId: string, hipId: string, hipType: string, purpose: string }): Promise<any> => {
+        const headers = this.headers(config.healthId)
         const url = `${this.baseUrl}gateway/v0.5/users/auth/fetch-modes`;
         const body = {
             "requestId": uuidv4(),
@@ -25,7 +26,7 @@ export default class UserAuth extends Header{
         }
 
         await new Request().request({
-            "headers": this.headers, "method": "POST", "requestBody": body, "url": url
+            "headers": headers, "method": "POST", "requestBody": body, "url": url
         })
 
         return body;
@@ -33,6 +34,8 @@ export default class UserAuth extends Header{
 
 
     init = async (config: { healthId: string, hipId: string, hipType: string, purpose: string, authMode: "MOBILE_OTP" | "DEMOGRAPHICS" | "AADHAAR_OTP" }): Promise<any> => {
+        
+        const headers = this.headers(config.healthId)
         const url = `${this.baseUrl}gateway/v0.5/users/auth/init`
 
         const body = {
@@ -50,13 +53,13 @@ export default class UserAuth extends Header{
         }
 
         await new Request().request({
-            "headers": this.headers, "method": "POST", "requestBody": body, "url": url
+            "headers": headers, "method": "POST", "requestBody": body, "url": url
         })
         return body;
     }
 
 
-    confirm = async (config: { transactionId: string, authCode?: string , demographic?: {
+    confirm = async (config: { healthId:string, transactionId: string, authCode?: string , demographic?: {
         "name": string,
         "gender": string,
         "dateOfBirth": string,
@@ -65,12 +68,8 @@ export default class UserAuth extends Header{
           "value": string
         }
     } }) => {
+        const headers = this.headers(config.healthId)
         const url = `${this.baseUrl}gateway/v0.5/users/auth/confirm`
-        const headers = {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${this.accessToken}`,
-            "X-CM-ID": this.xCmId
-        }
 
         const body = {
             "requestId": uuidv4(),
@@ -90,7 +89,7 @@ export default class UserAuth extends Header{
             }
         }
         await new Request().request({
-            "headers": headers, "method": "POST", "requestBody": body, "url": url
+            "headers":  headers, "method": "POST", "requestBody": body, "url": url
         })
 
         return body
