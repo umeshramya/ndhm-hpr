@@ -3,12 +3,15 @@ import { v4 as uuidv4 } from 'uuid';
 import Request from "./request";
 import Header from "./header";
 
+type Purpose = "KYC_AND_LINK" | "KYC" | "LINK"
+
+
 export default class UserAuth extends Header{
     constructor(_baseUrl: string, _accessToken: string) {
         super(_baseUrl, _accessToken)
     }
 
-    fetchModes= async (config: { healthId: string, hipId: string, hipType: string, purpose: string }): Promise<any> => {
+    fetchModes= async (config: { healthId: string, hipId: string, hipType: string, purpose: Purpose }): Promise<any> => {
         const headers = this.headers(config.healthId)
         const url = `${this.baseUrl}gateway/v0.5/users/auth/fetch-modes`;
         const body = {
@@ -33,7 +36,7 @@ export default class UserAuth extends Header{
     }
 
 
-    init = async (config: { healthId: string, hipId: string, hipType: string, purpose: string, authMode: "MOBILE_OTP" | "DEMOGRAPHICS" | "AADHAAR_OTP" }): Promise<any> => {
+    init = async (config: { healthId: string, hipId: string, hipType: string, purpose: Purpose, authMode: "MOBILE_OTP" | "DEMOGRAPHICS" | "AADHAAR_OTP" }): Promise<any> => {
         
         const headers = this.headers(config.healthId)
         const url = `${this.baseUrl}gateway/v0.5/users/auth/init`
