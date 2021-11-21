@@ -1,5 +1,6 @@
 // NEXT
 import { Register, UserAuth} from "ndhm-hrp"
+import { updateMethodSignature } from "typescript";
 export default async function handler(req, res) {
     const baseUrl = process.env.NDHM_URL
     const endpointUrl = process.env.NDHM_API
@@ -18,13 +19,23 @@ export default async function handler(req, res) {
 
 
 
-    let userAuth = new UserAuth("", accesstoken)
-    let result = await userAuth.fetchModes({
-        "healthId" : "umeshbilagi@sbx",
-        "hipId" : "jjh_123",
+    let userAuth = new UserAuth(baseUrl, accesstoken)
+    // let result = await userAuth.fetchModes({
+    //     "healthId" : "umeshbilagi@sbx",
+    //     "hipId" : "jjh_123",
+    //     "hipType" : "HIP",
+    //     "purpose" : "KYC_AND_LINK"
+    // })
+
+    let result =await  userAuth.init({
+        "authMode" : "DEMOGRAPHICS",
+        "healthId" : "umesh.123@sbx",
+        "hipId" : "JJH_123",
+        "purpose" : "KYC_AND_LINK",
         "hipType" : "HIP",
-        "purpose" : "KYC_AND_LINK"
     })
+
+    console.log(result)
 
 
     res.status(200).json({ result })
