@@ -64,7 +64,7 @@ export default class Register {
         "name": string
         "type": string
         "active": boolean
-        "alias": []
+        "alias": any
     }): Promise<any> => {
         const body = config
 
@@ -81,6 +81,24 @@ export default class Register {
         })
 
 
+
+    }
+
+    registerAndGetAccessToken = async (config: {
+        endpointUrl: string, facilityId: string, facilityName: string, facilityType: string
+    }): Promise<string> => {
+        const accesstoken = (await this.getAccessToken().then(res => JSON.parse(res))).accessToken
+        await this.updateHealthcareUrl(accesstoken, config.endpointUrl)
+
+        await this.registerFacility(accesstoken,
+            {
+                "active": true,
+                "alias": ["Eg"],
+                "id": config.facilityId,
+                "name": config.facilityName,
+                "type": config.facilityType
+            })
+        return accesstoken;
 
     }
 
