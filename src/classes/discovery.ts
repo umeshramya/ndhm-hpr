@@ -2,10 +2,11 @@ import Header from "./header";
 import { v4 as uuidv4 } from "uuid";
 import Request from "./request";
 
-export default class Discovery extends Header {
-  constructor(_baseUrl: string, _accessToken: string) {
-    super(_baseUrl, _accessToken);
-  }
+export default class Discovery {
+  // private baseUrl: string;
+  // constructor(_baseUrl: string) {
+  //   this.baseUrl = _baseUrl;
+  // }
 
   onDiscovery = (config: {
     transactionId: string;
@@ -17,7 +18,7 @@ export default class Discovery extends Header {
     errMessage: string;
     requestId: string;
   }) => {
-    const url = `${this.baseUrl}gateway/v0.5/care-contexts/on-discover`;
+    // const url = `${this.baseUrl}gateway/v0.5/care-contexts/on-discover`;
     const body = {
       requestId: uuidv4(),
       timestamp: new Date().toISOString(),
@@ -36,10 +37,6 @@ export default class Discovery extends Header {
         requestId: config.requestId,
       },
     };
-
-    // await new Request().request({
-    //   "headers": this.headers(config.patientReferenceNumber), "method": "POST", "requestBody": body, "url": url
-    // })
 
     return body;
   };
