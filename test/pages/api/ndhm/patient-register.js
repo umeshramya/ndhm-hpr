@@ -1,4 +1,3 @@
-// NEXT
 import { Register, UserAuth} from "ndhm-hrp"
 import { updateMethodSignature } from "typescript";
 export default async function handler(req, res) {
