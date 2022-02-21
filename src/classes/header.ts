@@ -57,9 +57,13 @@ export default class Header {
    * @param cmidmatch the
    */
   setBaseUrl(cmid: string) {
-    let url: string = X_CM_ID.filter((el) => el.id == cmid)[0].url || "";
-    if (url !== "") {
-      this.baseUrl = url;
+    try {
+      let url = X_CM_ID.filter((el) => el.id == cmid)[0].url;
+      if (url) {
+        this.baseUrl = url;
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
   /**
