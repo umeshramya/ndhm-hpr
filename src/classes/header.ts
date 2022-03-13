@@ -1,9 +1,9 @@
-import { X_CM_ID } from "./config";
+// import { X_CM_ID } from "./config";
 export default class Header {
   /**
    * this is request url for gateway consent manger
    */
-  public baseUrl: string = "";
+  public baseUrl: string = "https://dev.abdm.gov.in/";
   /**
    * cmid header in request
    */
@@ -34,7 +34,6 @@ export default class Header {
    */
   headers(healthId: string): any {
     this.setXCmId(healthId);
-    this.setBaseUrl(this.xCmId);
     this.headersObject = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${this.accessToken}`,
@@ -52,20 +51,6 @@ export default class Header {
     this.xCmId = healthId.substring(index + 1);
   }
 
-  /**
-   *
-   * @param cmidmatch the
-   */
-  setBaseUrl(cmid: string) {
-    try {
-      let url = X_CM_ID.filter((el) => el.id == cmid)[0].url;
-      if (url) {
-        this.baseUrl = url;
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
   /**
    *
    * @returns this tbase url of class
