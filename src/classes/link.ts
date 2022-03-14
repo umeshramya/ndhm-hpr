@@ -77,7 +77,7 @@ export default class Link extends Header {
     hipId: string;
   }) => {
     const headers = this.headers(config.healthId);
-    const url = `${this.baseUrl}gateway/v0.5/links/link/notify`;
+    const url = `${this.baseUrl}gateway/v0.5/links/context/notify`;
     const body = {
       requestId: uuidv4(),
       timestamp: new Date().toISOString(),
