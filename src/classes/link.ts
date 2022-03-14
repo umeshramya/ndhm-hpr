@@ -3,12 +3,12 @@ import Request from "./request";
 import Header from "./header";
 
 type HI_TYPES =
-  | "DiagnosticReportRecord"
-  | "DischargeSummaryRecord"
-  | "HealthDocumentRecord"
+  | "OPConsultation"
+  | "DiagnosticReport"
+  | "Prescription"
   | "ImmunizationRecord"
-  | "OPConsultRecord"
-  | "PrescriptionRecord"
+  | "DischargeSummary"
+  | "HealthDocumentRecord"
   | "WellnessRecord";
 
 export default class Link extends Header {
