@@ -6,7 +6,11 @@ export default class Discovery extends Header {
   constructor(_baseUrl: string, _accessToken: string) {
     super(_baseUrl, _accessToken);
   }
-
+  /**
+   * Result of patient care-context discovery request at HIP end. If a matching patient found with zero or more care contexts associated, it is specified as result attribute. If the prior discovery request, resulted in errors then it is specified in the error attribute. Reasons of errors can be
+   * @param config  body
+   * @returns
+   */
   onDiscovery = async (config: {
     transactionId: string;
     patientReferenceNumber: string;
