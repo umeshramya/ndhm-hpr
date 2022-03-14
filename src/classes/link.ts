@@ -59,9 +59,9 @@ export default class Link extends Header {
     return body;
   };
   /**
-   *
+   *This API is called by HIP only when there is new health data is added/created for a patient and under a care context that is already linked with patient's Health Account. HIP can send following things in this API to notify the Consent Manager about the new health data added:
    * @param config
-   * @healthId Patient's Identifier for which the new health data is added (It can be ABDM id or ABDM number)
+   * @healthId Patient's Identifier for which the new health data is added (It can be ABDM address or phr address)
    * @careContextReference   Care Context reference under which the new health data is added
    * @patientReference  Patient's reference (An identifier with which the patient is registered on HIP)
    * @hiTypes  Types of health information documents that have been added ("DiagnosticReportRecord" | "DischargeSummaryRecord" | "HealthDocumentRecord" | "ImmunizationRecord" | "OPConsultRecord" | "PrescriptionRecord" | "WellnessRecord")
