@@ -46,7 +46,6 @@ export default class Discovery extends Header {
       },
     };
 
-    console.log(url);
     await new Request().request({
       headers: headers,
       method: "POST",
