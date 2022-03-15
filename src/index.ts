@@ -1,7 +1,7 @@
 import Register from "./classes/register";
-import UserAuth from "./classes/userAuth"
-import Link from "./classes/link"
+import UserAuth from "./classes/userAuth";
+import Link from "./classes/link";
 import Discovery from "./classes/discovery";
+import ConsentFlow from "./classes/consent-flow";
 
-
-export { Register, UserAuth, Link, Discovery}
+export { Register, UserAuth, Link, Discovery, ConsentFlow };
