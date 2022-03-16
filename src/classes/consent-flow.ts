@@ -17,6 +17,8 @@ export default class ConsentFlow extends Header {
     healthId: string;
     consentId: string;
     requestId: string;
+    errCode?: string;
+    errMessage?: string;
   }) => {
     const headers = this.headers(config.healthId);
     const url = `${this.baseUrl}gateway/v0.5/consents/hip/on-notify`;
@@ -30,8 +32,8 @@ export default class ConsentFlow extends Header {
         consentId: config.consentId,
       },
       error: {
-        code: null,
-        message: "",
+        code: config.errCode || 1000,
+        message: config.errMessage || "string",
       },
       resp: {
         requestId: config.requestId,

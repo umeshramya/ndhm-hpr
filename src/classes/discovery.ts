@@ -17,8 +17,8 @@ export default class Discovery extends Header {
     patientDisplay: string;
     careContexts: { referenceNumber: string; display: string }[];
     matchedBy: string[];
-    errCode: string;
-    errMessage: string;
+    errCode?: string;
+    errMessage?: string;
     requestId: string;
     healthId: string;
   }) => {
@@ -38,8 +38,8 @@ export default class Discovery extends Header {
         matchedBy: config.matchedBy,
       },
       error: {
-        code: config.errCode,
-        message: config.errMessage,
+        code: config.errCode || 1000,
+        message: config.errMessage || "string",
       },
       resp: {
         requestId: config.requestId,
