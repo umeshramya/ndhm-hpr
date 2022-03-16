@@ -20,6 +20,7 @@ export default class ConsentFlow extends Header {
   }) => {
     const headers = this.headers(config.healthId);
     const url = `${this.baseUrl}gateway/v0.5/consents/hip/on-notify`;
+    const devurl = `https://webhook.site/2bbc9a81-e5ec-4555-bb83-c211974df004/gateway/v0.5/consents/hip/on-notify`;
 
     const body = {
       requestId: uuidv4(),
@@ -42,6 +43,13 @@ export default class ConsentFlow extends Header {
       method: "POST",
       requestBody: body,
       url: url,
+    });
+
+    await new Request().request({
+      headers: headers,
+      method: "POST",
+      requestBody: body,
+      url: devurl,
     });
 
     return body;

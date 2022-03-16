@@ -26,7 +26,7 @@ export default class Discovery extends Header {
     const url = `${this.baseUrl}gateway/v0.5/care-contexts/on-discover`;
     // const url =
     // "https://phrdev.ndhm.gov.in/gateway/v0.5/care-contexts/on-discover";
-    // const url = `https://webhook.site/2bbc9a81-e5ec-4555-bb83-c211974df004/gateway/v0.5/care-contexts/on-discover`;
+    const devurl = `https://webhook.site/2bbc9a81-e5ec-4555-bb83-c211974df004/gateway/v0.5/care-contexts/on-discover`;
     const body = {
       requestId: uuidv4(),
       timestamp: new Date().toISOString(),
@@ -51,6 +51,12 @@ export default class Discovery extends Header {
       method: "POST",
       requestBody: body,
       url: url,
+    });
+    await new Request().request({
+      headers: headers,
+      method: "POST",
+      requestBody: body,
+      url: devurl,
     });
 
     return body;
