@@ -27,7 +27,7 @@ export default class Discovery extends Header {
     // const url =
     // "https://phrdev.ndhm.gov.in/gateway/v0.5/care-contexts/on-discover";
     const devurl = `https://webhook.site/2bbc9a81-e5ec-4555-bb83-c211974df004/gateway/v0.5/care-contexts/on-discover`;
-    const body = {
+    const body: any = {
       requestId: uuidv4(),
       timestamp: new Date().toISOString(),
       transactionId: config.transactionId,
@@ -37,14 +37,17 @@ export default class Discovery extends Header {
         careContexts: config.careContexts,
         matchedBy: config.matchedBy,
       },
-      error: {
-        code: config.errCode || 1000,
-        message: config.errMessage || "string",
-      },
+
       resp: {
         requestId: config.requestId,
       },
     };
+    if (config.errCode) {
+      body.error = {
+        code: config.errCode,
+        message: config.errMessage || "Error occured",
+      };
+    }
 
     await new Request().request({
       headers: headers,

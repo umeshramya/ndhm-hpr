@@ -24,21 +24,24 @@ export default class ConsentFlow extends Header {
     const url = `${this.baseUrl}gateway/v0.5/consents/hip/on-notify`;
     const devurl = `https://webhook.site/2bbc9a81-e5ec-4555-bb83-c211974df004/gateway/v0.5/consents/hip/on-notify`;
 
-    const body = {
+    const body: any = {
       requestId: uuidv4(),
       timestamp: new Date().toISOString(),
       acknowledgement: {
         status: "OK",
         consentId: config.consentId,
       },
-      error: {
-        code: config.errCode || 1000,
-        message: config.errMessage || "string",
-      },
       resp: {
         requestId: config.requestId,
       },
     };
+
+    if (config.errCode) {
+      body.error = {
+        code: config.errCode,
+        message: config.errMessage || "Error occured",
+      };
+    }
 
     await new Request().request({
       headers: headers,
