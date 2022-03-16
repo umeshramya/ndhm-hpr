@@ -60,12 +60,6 @@ export default class Discovery extends Header {
       headers: headers,
       method: "POST",
       requestBody: body,
-      url: phrurl,
-    });
-    await new Request().request({
-      headers: headers,
-      method: "POST",
-      requestBody: body,
       url: devurl,
     });
 
