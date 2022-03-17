@@ -20,7 +20,8 @@ export default class ConsentFlow extends Header {
     errCode?: string;
     errMessage?: string;
   }) => {
-    const headers = this.headers(config.healthId);
+    try {
+      const headers = this.headers(config.healthId);
     const url = `${this.baseUrl}gateway/v0.5/consents/hip/on-notify`;
     const devurl = `https://webhook.site/2bbc9a81-e5ec-4555-bb83-c211974df004/gateway/v0.5/consents/hip/on-notify`;
 
@@ -43,12 +44,14 @@ export default class ConsentFlow extends Header {
       };
     }
 
-    await new Request().request({
+    const res=  await new Request().request({
       headers: headers,
       method: "POST",
       requestBody: body,
       url: url,
     });
+
+    console.log(res)
 
     await new Request().request({
       headers: headers,
@@ -58,5 +61,9 @@ export default class ConsentFlow extends Header {
     });
 
     return body;
+    } catch (error) {
+  console.log(error)
+    }
+    
   };
 }
