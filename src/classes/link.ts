@@ -110,6 +110,13 @@ Care context reference numbers are invalid
       body.error = config.error;
     }
 
+    await new Request().request({
+      headers: headers,
+      method: "POST",
+      requestBody: body,
+      url: url,
+    });
+
     return body;
   };
 
