@@ -58,6 +58,61 @@ export default class Link extends Header {
 
     return body;
   };
+
+  /**
+   * Result of patient care-context link request from HIP end. This happens in context of previous discovery of patient found at HIP end, therefore the link requests ought to be in reference to the patient reference and care-context references previously returned by the HIP. The correlation of discovery and link request is maintained through the transactionId. HIP should have
+   * @param config
+   * 
+   * Validated transactionId in the request to check whether there was a discovery done previously, and the link request corresponds to returned patient care care context references
+Before returning the response, HIP should have sent an authentication request to the patient(eg: OTP verification)
+HIP should communicate the mode of authentication of a successful request
+HIP subsequently should expect the token passed via /link/confirm against the link.referenceNumber passed in this call
+The error section in the body, represents the potential errors that may have occurred. Possible reasons:
+
+Patient reference number is invalid
+Care context reference numbers are invalid
+   */
+  onInit = async (config: {
+    healthId: string;
+    transactionId: string;
+    referenceNumber: string;
+    communicationHint: string;
+    communicationExpiry?: string;
+    requestId: string;
+    error?: {
+      code: number;
+      message: string;
+    };
+  }) => {
+    const headers = this.headers(config.healthId);
+    const url = `${this.baseUrl}gateway/v0.5/links/link/on-init`;
+    const body: any = {
+      requestId: uuidv4(),
+      timestamp: new Date().toISOString(),
+      transactionId: config.transactionId,
+      link: {
+        referenceNumber: config.referenceNumber,
+        authenticationType: "DIRECT",
+        meta: {
+          communicationMedium: "MOBILE",
+          communicationHint: config.communicationHint,
+          communicationExpiry:
+            config.communicationExpiry ||
+            new Date(new Date().getTime() + 10 * 60000).toISOString(),
+        },
+      },
+      resp: {
+        requestId: config.requestId,
+      },
+    };
+
+    if (config.error) {
+      body.error = config.error;
+    }
+
+    return body;
+  };
+
   /**
    *This API is called by HIP only when there is new health data is added/created for a patient and under a care context that is already linked with patient's Health Account. HIP can send following things in this API to notify the Consent Manager about the new health data added:
    * @param config
