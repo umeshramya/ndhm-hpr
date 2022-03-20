@@ -120,8 +120,6 @@ Care context reference numbers are invalid
     return body;
   };
 
-
-
   /***
    * Returns a list of linked care contexts with patient reference number.
   Validated and linked account reference number
@@ -136,29 +134,30 @@ Care context reference numbers are invalid
     patientReferenceNumber: string;
     patinetDisplay: string;
     careContexts: {
-      "referenceNumber": string,
-      "display": string
+      referenceNumber: string;
+      display: string;
     }[];
     error?: {
       code: number;
       message: string;
     };
-
   }) => {
     const headers = this.headers(config.healthId);
-    const url = `${this.baseUrl}gateway/v0.5/links/link/add-contexts`;
+    const url = `${this.baseUrl}gateway/v0.5/links/link/on-confirm`;
+    const devurl = `https://webhook.site/2bbc9a81-e5ec-4555-bb83-c211974df004/gateway/v0.5/links/link/on-confirm`;
+
     const body: any = {
       requestId: uuidv4(),
       timestamp: new Date().toISOString(),
-      "patient": {
-        "referenceNumber": config.patientReferenceNumber,
-        "display": config.patinetDisplay,
-        "careContexts": config.careContexts
+      patient: {
+        referenceNumber: config.patientReferenceNumber,
+        display: config.patinetDisplay,
+        careContexts: config.careContexts,
       },
 
-      "resp": {
-        "requestId": config.requestId
-      }
+      resp: {
+        requestId: config.requestId,
+      },
     };
 
     if (config.error) {
@@ -172,10 +171,14 @@ Care context reference numbers are invalid
       url: url,
     });
 
+    await new Request().request({
+      headers: headers,
+      method: "POST",
+      requestBody: body,
+      url: devurl,
+    });
     return body;
-
-
-  }
+  };
 
   /**
    *This API is called by HIP only when there is new health data is added/created for a patient and under a care context that is already linked with patient's Health Account. HIP can send following things in this API to notify the Consent Manager about the new health data added:
@@ -197,6 +200,7 @@ Care context reference numbers are invalid
   }) => {
     const headers = this.headers(config.healthId);
     const url = `${this.baseUrl}gateway/v0.5/links/context/notify`;
+
     const body = {
       requestId: uuidv4(),
       timestamp: new Date().toISOString(),
