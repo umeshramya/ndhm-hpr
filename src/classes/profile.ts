@@ -36,25 +36,26 @@ export default class Profile extends Header {
         code: config.errCode,
         message: config.errMessage || "Error occured",
       };
-
-      console.log(JSON.stringify(body))
-
-      await new Request().request({
-        headers: headers,
-        method: "POST",
-        requestBody: body,
-        url: url,
-      });
-
-      await new Request().request({
-        headers: headers,
-        method: "POST",
-        requestBody: body,
-        url: webHook,
-      });
-
-
-      return body;
     }
+
+
+
+    await new Request().request({
+      headers: headers,
+      method: "POST",
+      requestBody: body,
+      url: url,
+    });
+
+    await new Request().request({
+      headers: headers,
+      method: "POST",
+      requestBody: body,
+      url: webHook,
+    });
+
+
+    return body;
+
   };
 }
