@@ -20,8 +20,13 @@ export default class AbhaNumber {
     }
   }
 
-  generatAadhaareOTP = async (aadhaar: number): Promise<any> => {
-    const url = `${this.abhaBaseUrl}/v1/account/aadhaar/generateOTP`;
+  generatAadhaareOTP = async (
+    aadhaar: number
+  ): Promise<{
+    mobileNumber: string;
+    txnId: string;
+  }> => {
+    const url = `${this.abhaBaseUrl}/v1/registration/aadhaar/generateOtp`;
     const body = {
       aadhaar: aadhaar,
     };
