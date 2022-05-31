@@ -3,27 +3,20 @@ import Request from "./request";
 import Header from "./header";
 
 export default class AbhaNumber {
-  private abhaBaseUrl:
-    | `https://healthidsbx.abdm.gov.in/api`
-    | `https://healthid.abdm.gov.in/api`;
+  private abhaBaseUrl: string;
   private headers: any;
 
-  constructor(_accessToken: string, env: "Dev" | "Prod") {
+  constructor(_accessToken: string, abhaBaseUrl: string) {
     this.headers = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${_accessToken}`,
     };
-    if (env == "Dev") {
-      this.abhaBaseUrl = "https://healthidsbx.abdm.gov.in/api";
-    } else {
-      this.abhaBaseUrl = "https://healthid.abdm.gov.in/api";
-    }
+    this.abhaBaseUrl = abhaBaseUrl;
   }
 
   generatAadhaareOTP = async (
     aadhaar: number
   ): Promise<{
-    mobileNumber: string;
     txnId: string;
   }> => {
     const url = `${this.abhaBaseUrl}/v1/registration/aadhaar/generateOtp`;
@@ -37,22 +30,24 @@ export default class AbhaNumber {
       requestBody: body,
       url: url,
     });
-
-    return res;
+    const ret = JSON.parse(JSON.stringify(res));
+    return JSON.parse(JSON.stringify(ret.body));
   };
 
-  aadharVerifyOtp = async (
-    otp: string,
-    txnId: string
-  ): Promise<{
+  aadharVerifyOtp = async (options: {
+    otp: string;
+    txnId: string;
+    restrictions?: string;
+  }): Promise<{
     mobileNumber: string;
     txnId: string;
   }> => {
     const url = `${this.abhaBaseUrl}/v1/registration/aadhaar/verifyOTP`;
 
     const body = {
-      otp: otp,
-      txnId: txnId,
+      otp: options.otp,
+      restrictions: options.restrictions,
+      txnId: options.txnId,
     };
 
     const res = await new Request().request({
@@ -62,7 +57,8 @@ export default class AbhaNumber {
       url: url,
     });
 
-    return res;
+    const ret = JSON.parse(JSON.stringify(res));
+    return JSON.parse(JSON.stringify(ret.body));
   };
 
   generateMobileOtp = async (
@@ -86,7 +82,8 @@ export default class AbhaNumber {
       url: url,
     });
 
-    return res;
+    const ret = JSON.parse(JSON.stringify(res));
+    return JSON.parse(JSON.stringify(ret.body));
   };
 
   verifyMobileOtp = async (
@@ -110,6 +107,58 @@ export default class AbhaNumber {
       url: url,
     });
 
-    return res;
+    const ret = JSON.parse(JSON.stringify(res));
+    return JSON.parse(JSON.stringify(ret.body));
+  };
+
+  createHealthIdWithPreVerified = async (options: {
+    email?: string;
+    firstName?: string;
+    healthId: string;
+    lastName?: string;
+    middleName?: string;
+    password: string;
+    profilePhoto?: string;
+    txnId: string;
+  }): Promise<{
+    authMethods: ["AADHAAR_OTP"];
+    dayOfBirth: string;
+    districtCode: string;
+    districtName: string;
+    email: string;
+    firstName: string;
+    gender: string;
+    healthId: string;
+    healthIdNumber: string;
+    kycPhoto: string;
+    lastName: string;
+    middleName: string;
+    mobile: string;
+    monthOfBirth: string;
+    name: string;
+    new: true;
+    stateCode: string;
+    stateName: string;
+    tags: {
+      additionalProp1: string;
+      additionalProp2: string;
+      additionalProp3: string;
+    };
+    token: string;
+    yearOfBirth: string;
+  }> => {
+    const url = `${this.abhaBaseUrl}/v1/registration/aadhaar/createHealthIdWithPreVerified`;
+
+    const body = options;
+
+    const res = await new Request().request({
+      headers: this.headers,
+      method: "POST",
+      requestBody: body,
+      url: url,
+    });
+
+    const ret = JSON.parse(JSON.stringify(res));
+    return JSON.parse(JSON.stringify(ret.body));
   };
 }

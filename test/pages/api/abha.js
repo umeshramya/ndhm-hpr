@@ -6,8 +6,8 @@ export default async function handler(req, res) {
     const endpointUrl = process.env.NDHM_API
     const register = new Register(process.env.CLIENT_ID, process.env.CLIENT_SECRET, baseUrl);
     const accesstoken = (await register.getAccessToken().then(res => JSON.parse(res))).accessToken
-    console.log(accesstoken)
-    const abha = new AbhaNumber(accesstoken,"Dev");
+
+    const abha = new AbhaNumber(accesstoken,process.env.ABHA_BASE_URL);
     const curRes =await abha.generatAadhaareOTP("514790474721");
     
   
