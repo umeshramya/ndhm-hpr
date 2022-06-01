@@ -31,7 +31,7 @@ export default class AbhaNumber {
       url: url,
     });
     const ret = JSON.parse(JSON.stringify(res));
-    return JSON.parse(JSON.stringify(ret.body));
+    return JSON.parse(ret.body);
   };
 
   aadharVerifyOtp = async (options: {
@@ -39,7 +39,6 @@ export default class AbhaNumber {
     txnId: string;
     restrictions?: string;
   }): Promise<{
-    mobileNumber: string;
     txnId: string;
   }> => {
     const url = `${this.abhaBaseUrl}/v1/registration/aadhaar/verifyOTP`;
@@ -58,14 +57,13 @@ export default class AbhaNumber {
     });
 
     const ret = JSON.parse(JSON.stringify(res));
-    return JSON.parse(JSON.stringify(ret.body));
+    return JSON.parse(ret.body);
   };
 
   generateMobileOtp = async (
     mobile: string,
     txnId: string
   ): Promise<{
-    mobileNumber: string;
     txnId: string;
   }> => {
     const url = `${this.abhaBaseUrl}/v1/registration/aadhaar/generateMobileOTP`;
@@ -83,17 +81,16 @@ export default class AbhaNumber {
     });
 
     const ret = JSON.parse(JSON.stringify(res));
-    return JSON.parse(JSON.stringify(ret.body));
+    return JSON.parse(ret.body);
   };
 
   verifyMobileOtp = async (
     otp: string,
     txnId: string
   ): Promise<{
-    mobileNumber: string;
     txnId: string;
   }> => {
-    const url = `${this.abhaBaseUrl}/v1/registration/aadhaar/verifyMobileOTP`;
+    const url = `${this.abhaBaseUrl}/v1/registration/aadhaar/verifyMobileOTPP`;
 
     const body = {
       otp: otp,
@@ -108,17 +105,17 @@ export default class AbhaNumber {
     });
 
     const ret = JSON.parse(JSON.stringify(res));
-    return JSON.parse(JSON.stringify(ret.body));
+    return JSON.parse(ret.body);
   };
 
   createHealthIdWithPreVerified = async (options: {
-    email?: string;
-    firstName?: string;
+    email: string;
+    firstName: string;
     healthId: string;
-    lastName?: string;
-    middleName?: string;
+    lastName: string;
+    middleName: string;
     password: string;
-    profilePhoto?: string;
+    profilePhoto: string;
     txnId: string;
   }): Promise<{
     authMethods: ["AADHAAR_OTP"];
@@ -159,6 +156,6 @@ export default class AbhaNumber {
     });
 
     const ret = JSON.parse(JSON.stringify(res));
-    return JSON.parse(JSON.stringify(ret.body));
+    return JSON.parse(ret.body);
   };
 }
