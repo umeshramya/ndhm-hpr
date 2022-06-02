@@ -90,7 +90,7 @@ export default class AbhaNumber {
   ): Promise<{
     txnId: string;
   }> => {
-    const url = `${this.abhaBaseUrl}/v1/registration/aadhaar/verifyMobileOTPP`;
+    const url = `${this.abhaBaseUrl}/v1/registration/aadhaar/verifyMobileOTP`;
 
     const body = {
       otp: otp,
