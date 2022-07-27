@@ -24,10 +24,7 @@ export default class Discovery extends Header {
   }) => {
     const headers = this.headers(config.healthId);
     const url = `${this.baseUrl}gateway/v0.5/care-contexts/on-discover`;
-    // const phrurl =
-    // "https://phrdev.ndhm.gov.in/gateway/v0.5/care-contexts/on-discover";
-    // const devurl = `https://webhook.site/2bbc9a81-e5ec-4555-bb83-c211974df004/gateway/v0.5/care-contexts/on-discover`;
-    const body: any = {
+        const body: any = {
       requestId: uuidv4(),
       timestamp: new Date().toISOString(),
       transactionId: config.transactionId,
@@ -55,22 +52,6 @@ export default class Discovery extends Header {
       requestBody: body,
       url: url,
     });
-
-    // await new Request().request({
-    //   headers: headers,
-    //   method: "POST",
-    //   requestBody: body,
-    //   url: phrurl,
-    // });
-
-
-
-    // await new Request().request({
-    //   headers: headers,
-    //   method: "POST",
-    //   requestBody: body,
-    //   url: devurl,
-    // });
 
     return body;
   };

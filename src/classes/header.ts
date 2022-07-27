@@ -3,7 +3,8 @@ export default class Header {
   /**
    * this is request url for gateway consent manger
    */
-  public baseUrl: string = "https://dev.abdm.gov.in/";
+  // public baseUrl: string = "https://dev.abdm.gov.in/";
+  public baseUrl: string ;
   /**
    * cmid header in request
    */
