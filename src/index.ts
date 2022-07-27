@@ -5,6 +5,7 @@ import Discovery from "./classes/discovery";
 import ConsentFlow from "./classes/consent-flow";
 import Profile from "./classes/profile";
 import AbhaNumber from "./classes/abha";
+import DataFlow from "./classes/data-flow";
 
 export {
   Register,
@@ -14,4 +15,5 @@ export {
   ConsentFlow,
   Profile,
   AbhaNumber,
+  DataFlow
 };
