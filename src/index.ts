@@ -6,6 +6,7 @@ import ConsentFlow from "./classes/consent-flow";
 import Profile from "./classes/profile";
 import AbhaNumber from "./classes/abha";
 import DataFlow from "./classes/data-flow";
+import HealthInformation, {STATUS_RESPONSES_HEALTH_INFORMATION_NOTIFY} from "./classes/health-information";
 
 export {
   Register,
@@ -15,5 +16,7 @@ export {
   ConsentFlow,
   Profile,
   AbhaNumber,
-  DataFlow
+  DataFlow,
+  HealthInformation,
+  STATUS_RESPONSES_HEALTH_INFORMATION_NOTIFY
 };
