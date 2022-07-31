@@ -56,4 +56,81 @@ export default class DataFlow extends Header {
       console.log(error);
     }
   };
+
+  dataPushURL = async (config: {
+    healthId: string;
+    datapushUrl: string;
+    linkEntries?: {
+      link: string;
+      media: "application/fhir+json";
+      checksum: "string";
+      careContextReference: string;
+    }[];
+    dataEntries?: {
+      content: string;
+      media: "application/fhir+json";
+      checksum: "string";
+      careContextReference: string;
+    }[];
+    pageCount: number;
+    pageIndex: number;
+    transactionId: string;
+    expireDate: string;
+    publicKey: string;
+    nonce: string;
+    errCode: string;
+    errMessage: string;
+  }) => {
+    try {
+      const headers = this.headers(config.healthId);
+      const url = config.datapushUrl;
+
+      const entrise: any[] = [];
+      if (config.dataEntries) {
+        config.dataEntries.forEach((element) => {
+          entrise.push(element);
+        });
+      }
+      if (config.linkEntries) {
+        config.linkEntries.forEach((el) => {
+          entrise.push(el);
+        });
+      }
+
+      const body: any = {
+        pageNumber: config.pageIndex,
+        pageCount: config.pageCount,
+        transactionId: config.transactionId,
+        entries: entrise,
+        keyMaterial: {
+          cryptoAlg: "ECDH",
+          curve: "Curve25519",
+          dhPublicKey: {
+            expiry: config.expireDate,
+            parameters: "Curve25519/32byte random key",
+            keyValue: config.publicKey,
+          },
+          nonce: config.nonce,
+        },
+      };
+
+      if (config.errCode) {
+        body.error = {
+          code: config.errCode,
+          message: config.errMessage || "Error occured",
+        };
+      }
+
+      const res = await new Request().request({
+        headers: headers,
+        method: "POST",
+        requestBody: body,
+        url: url,
+      });
+
+      return body;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
