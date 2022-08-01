@@ -84,7 +84,7 @@ export default class DataFlow extends Header {
     try {
       const headers = this.headers(config.healthId);
       const url = config.datapushUrl;
-      const webHooKUrl =`https://webhook.site/56a28ebb-1b49-41ee-9220-0d19c23990a8`
+
 
       const entrise: any[] = [];
       if (config.dataEntries) {
@@ -129,13 +129,6 @@ export default class DataFlow extends Header {
         url: url,
       });
 
-
-      await new Request().request({
-        headers: headers,
-        method: "POST",
-        requestBody: body,
-        url: webHooKUrl,
-      });
       return body;
     } catch (error) {
       console.log(error);
