@@ -7,6 +7,7 @@ import Profile from "./classes/profile";
 import AbhaNumber from "./classes/abha";
 import DataFlow from "./classes/data-flow";
 import HealthInformation, {STATUS_RESPONSES_HEALTH_INFORMATION_NOTIFY} from "./classes/health-information";
+import ConsentRequest, {PurposeArray} from "./classes/consent-request";
 
 export {
   Register,
@@ -18,5 +19,7 @@ export {
   AbhaNumber,
   DataFlow,
   HealthInformation,
-  STATUS_RESPONSES_HEALTH_INFORMATION_NOTIFY
+  STATUS_RESPONSES_HEALTH_INFORMATION_NOTIFY,
+  ConsentRequest,
+  PurposeArray
 };
