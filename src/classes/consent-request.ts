@@ -10,7 +10,7 @@ export const PurposeArray = [
   { code: "PATRQT", display: "Self Requested" },
 ] as const;
 
-export interface CONSENTFLOW_REQUEST_INIT{
+export interface CONSENTFLOW_REQUEST_INIT {
   healthId: string;
   errCode?: string;
   errMessage?: string;
@@ -20,34 +20,40 @@ export interface CONSENTFLOW_REQUEST_INIT{
     patientReference: string;
     careContextReference: string;
   }[];
-  hiTypes : hiTypes[]
-  dateRange : {"from" :string, "to" : string}
-  dataEraseAt:string,
-  frequency : {
-    unit: "HOUR",
-    value: 0,
-    repeats: 0,
-  },
-  accessMode : "VIEW"| "STORE" | "QUERY" | "STREAM" 
-  hiu:string
-  requester : {
-    name: string,
-    identifier ?: {
-      type: string,
-      value: string,
-      system?: string,
-    },
-  }
+  hiTypes: hiTypes[];
+  dateRange: { from: string; to: string };
+  dataEraseAt: string;
+  frequency: {
+    unit: "HOUR";
+    value: 0;
+    repeats: 0;
+  };
+  accessMode: "VIEW" | "STORE" | "QUERY" | "STREAM";
+  hiu: string;
+  requester: {
+    name: string;
+    identifier?: {
+      type: string;
+      value: string;
+      system?: string;
+    };
+  };
 }
 
 const puposeDisplay = PurposeArray.map((el) => el);
 type pouposeType = typeof puposeDisplay[number];
 
-
-const hiTypesArry = ["OPConsultation", "Prescription", "DischargeSummary" , "DiagnosticReport", "ImmunizationRecord", "HealthDocumentRecord", "WellnessRecord"] as const
-const  hiTypesIntern = hiTypesArry.map(el=>el);
-type hiTypes = typeof hiTypesIntern[number]
-
+const hiTypesArry = [
+  "OPConsultation",
+  "Prescription",
+  "DischargeSummary",
+  "DiagnosticReport",
+  "ImmunizationRecord",
+  "HealthDocumentRecord",
+  "WellnessRecord",
+] as const;
+const hiTypesIntern = hiTypesArry.map((el) => el);
+type hiTypes = typeof hiTypesIntern[number];
 
 const typePurpose = typeof PurposeArray.map((el) => el);
 export default class ConsentRequest extends Header {
@@ -56,8 +62,8 @@ export default class ConsentRequest extends Header {
   }
   /**
    * Creates a consent request to get data about a patient by HIU user.
-   * @param config 
-   * @returns 
+   * @param config
+   * @returns
    */
   init = async (config: CONSENTFLOW_REQUEST_INIT) => {
     try {
@@ -81,12 +87,12 @@ export default class ConsentRequest extends Header {
             id: config.hiu,
           },
           requester: config.requester,
-          hiTypes:config.hiTypes,
+          hiTypes: config.hiTypes,
           permission: {
             accessMode: config.accessMode,
             dateRange: config.dateRange,
             dataEraseAt: config.dataEraseAt,
-            frequency:config.frequency
+            frequency: config.frequency,
           },
         },
       };
@@ -113,6 +119,30 @@ export default class ConsentRequest extends Header {
           message: config.errMessage || "Error occured",
         };
       }
+
+      const res = await new Request().request({
+        headers: headers,
+        method: "POST",
+        requestBody: body,
+        url: url,
+      });
+
+      return body;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  status = async (config: { healthId: string; consentRequestId: string }) => {
+    try {
+      const headers = this.headers(config.healthId);
+      const url = `${this.baseUrl}gateway/v0.5/consent-requests/status`;
+
+      const body: any = {
+        requestId: uuidv4(),
+        timestamp: new Date().toISOString(),
+        consentRequestId: config.consentRequestId,
+      };
 
       const res = await new Request().request({
         headers: headers,
