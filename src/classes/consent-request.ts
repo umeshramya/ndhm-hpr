@@ -10,6 +10,36 @@ export const PurposeArray = [
   { code: "PATRQT", display: "Self Requested" },
 ] as const;
 
+export interface CONSENTFLOW_REQUEST_INIT{
+  healthId: string;
+  errCode?: string;
+  errMessage?: string;
+  purpose: typeof PurposeArray[number];
+  hipId?: string;
+  careContexts?: {
+    patientReference: string;
+    careContextReference: string;
+  }[];
+  hiTypes : hiTypes[]
+  dateRange : {"from" :string, "to" : string}
+  dataEraseAt:string,
+  frequency : {
+    unit: "HOUR",
+    value: 0,
+    repeats: 0,
+  },
+  accessMode : "VIEW"| "STORE" | "QUERY" | "STREAM" 
+  hiu:string
+  requester : {
+    name: string,
+    identifier ?: {
+      type: string,
+      value: string,
+      system?: string,
+    },
+  }
+}
+
 const puposeDisplay = PurposeArray.map((el) => el);
 type pouposeType = typeof puposeDisplay[number];
 
@@ -29,35 +59,7 @@ export default class ConsentRequest extends Header {
    * @param config 
    * @returns 
    */
-  init = async (config: {
-    healthId: string;
-    errCode?: string;
-    errMessage?: string;
-    purpose: typeof PurposeArray[number];
-    hipId?: string;
-    careContexts?: {
-      patientReference: string;
-      careContextReference: string;
-    }[];
-    hiTypes : hiTypes[]
-    dateRange : {"from" :string, "to" : string}
-    dataEraseAt:string,
-    frequency : {
-      unit: "HOUR",
-      value: 0,
-      repeats: 0,
-    },
-    accessMode : "VIEW"| "STORE" | "QUERY" | "STREAM" 
-    hiu:string
-    requester : {
-      name: string,
-      identifier ?: {
-        type: string,
-        value: string,
-        system?: string,
-      },
-    }
-  }) => {
+  init = async (config: CONSENTFLOW_REQUEST_INIT) => {
     try {
       const headers = this.headers(config.healthId);
       const url = `${this.baseUrl}gateway/v0.5/consent-requests/init`;
