@@ -59,6 +59,50 @@ export default class ConsentFlow extends Header {
     
   };
 
+/**
+ * This API send fectch request from HIU after patient has and granted this is called by hiu/noitfy callback from gateway
+ * @param config 
+ * @returns 
+ */
+  hiuConsentFetch = async (config: {
+    healthId: string;
+    consentId: string;
+    errCode?: string;
+    errMessage?: string;
+  }) => {
+    try {
+      const headers = this.headers(config.healthId);
+    const url = `${this.baseUrl}gateway/v0.5/consents/fetch`;
+   
+    const body: any = {
+      requestId: uuidv4(),
+      timestamp: new Date().toISOString(),
+      "consentId": config.consentId
+    };
+
+    if (config.errCode) {
+      body.error = {
+        code: config.errCode,
+        message: config.errMessage || "Error occured",
+      };
+    }
+
+    const res=  await new Request().request({
+      headers: headers,
+      method: "POST",
+      requestBody: body,
+      url: url,
+    });
+
+
+
+    return body;
+    } catch (error) {
+  console.log(error)
+    }
+    
+  };
+
 
   
 
