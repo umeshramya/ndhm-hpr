@@ -19,7 +19,7 @@ export default class Profile extends Header {
   }) => {
     const headers = this.headers(config.healthId);
     const url = `${this.baseUrl}gateway/v0.5/patients/profile/on-share`;
-    const webHook = `https://webhook.site/112bfbf7-36af-45eb-b257-28f1fb7b5ff9/v0.5/patients/profile/on-share`
+   
     const body: any = {
       requestId: uuidv4(),
       timestamp: new Date().toISOString(),
@@ -47,12 +47,7 @@ export default class Profile extends Header {
       url: url,
     });
 
-    await new Request().request({
-      headers: headers,
-      method: "POST",
-      requestBody: body,
-      url: webHook,
-    });
+
 
 
     return body;
