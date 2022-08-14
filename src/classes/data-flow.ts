@@ -86,15 +86,15 @@ export default class DataFlow extends Header {
       const url = config.datapushUrl;
 
 
-      const entrise: any[] = [];
+      const entries: any[] = [];
       if (config.dataEntries) {
         config.dataEntries.forEach((element) => {
-          entrise.push(element);
+          entries.push(element);
         });
       }
       if (config.linkEntries) {
         config.linkEntries.forEach((el) => {
-          entrise.push(el);
+          entries.push(el);
         });
       }
 
@@ -102,7 +102,7 @@ export default class DataFlow extends Header {
         pageNumber: config.pageIndex,
         pageCount: config.pageCount,
         transactionId: config.transactionId,
-        entries: entrise,
+        entries: entries,
         keyMaterial: {
           cryptoAlg: "ECDH",
           curve: "Curve25519",
