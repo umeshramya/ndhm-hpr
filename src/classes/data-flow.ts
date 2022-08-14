@@ -85,7 +85,6 @@ export default class DataFlow extends Header {
       const headers = this.headers(config.healthId);
       const url = config.datapushUrl;
 
-
       const entries: any[] = [];
       if (config.dataEntries) {
         config.dataEntries.forEach((element) => {
