@@ -2,10 +2,10 @@ import Header from "./header";
 import { v4 as uuidv4 } from "uuid";
 import Request from "./request";
 
-export interface STATUS_RESPONSES_HEALTH_INFORMATION_NOTIFY{
-  "careContextReference": string,
-  "hiStatus": "DELIVERED"| "OK" | "ERRORED",
-  "description": string
+export interface STATUS_RESPONSES_HEALTH_INFORMATION_NOTIFY {
+  careContextReference: string;
+  hiStatus: "DELIVERED" | "OK" | "ERRORED";
+  description: string;
 }
 
 export default class HealthInformation extends Header {
@@ -14,72 +14,122 @@ export default class HealthInformation extends Header {
   }
 
   /**
-   *  * API called by HIU and HIP during data-transfer.
-   * HIP on transfer of data would send sessionStatus - one of [TRANSFERRED, FAILED]
-   * HIP would also send hiStatus for each careContextReference - on of [DELIVERED, ERRORED]
-   * HIU on receipt of data would send sessionStatus - one of [TRANSFERRED, FAILED]. For example, FAILED when if data was not sent or if invalid data was sent
-   * HIU would also send hiStatus for each careContextReference - one of [OK, ERRORED]  
-   * @param config 
-   * @returns 
+   * Request for Health information against a consent id. CM would generate a transactionId against each consent and pass it as trnasaction context / correlation id to the HIP and also return the same to HIU via /on-request.
+   * @param config
+   * @returns
    */
   notify = async (config: {
     healthId: string;
     consentId: string;
-    transactionId : string
-    notifer : "HIU" | "HIP";
-    notifierId : string;
-    hipId : string;
-    sessionStatus : "TRANSFERRED" | "FAILED" ;
+    transactionId: string;
+    notifer: "HIU" | "HIP";
+    notifierId: string;
+    hipId: string;
+    sessionStatus: "TRANSFERRED" | "FAILED";
     errCode?: string;
     errMessage?: string;
-    statusResponses:STATUS_RESPONSES_HEALTH_INFORMATION_NOTIFY[]
+    statusResponses: STATUS_RESPONSES_HEALTH_INFORMATION_NOTIFY[];
   }) => {
     try {
       const headers = this.headers(config.healthId);
-    const url = `${this.baseUrl}gateway/v0.5/health-information/notify`;
+      const url = `${this.baseUrl}gateway/v0.5/health-information/notify`;
 
-   
-    const body: any = {
-      requestId: uuidv4(),
-      timestamp: new Date().toISOString(),
-      "notification": {
-        "consentId": config.consentId,
-        "transactionId": config.transactionId,
-        "doneAt":new Date().toISOString(),
-        "notifier": {
-          "type": config.notifer,
-          "id": config.notifierId
+      const body: any = {
+        requestId: uuidv4(),
+        timestamp: new Date().toISOString(),
+        notification: {
+          consentId: config.consentId,
+          transactionId: config.transactionId,
+          doneAt: new Date().toISOString(),
+          notifier: {
+            type: config.notifer,
+            id: config.notifierId,
+          },
+          statusNotification: {
+            sessionStatus: config.sessionStatus,
+            hipId: config.hipId,
+            statusResponses: config.statusResponses,
+          },
         },
-        "statusNotification": {
-          "sessionStatus": config.sessionStatus,
-          "hipId": config.hipId,
-          "statusResponses":config.statusResponses
-        }
-      }
-    };
-
-    if (config.errCode) {
-      body.error = {
-        code: config.errCode,
-        message: config.errMessage || "Error occured",
       };
-    }
 
-    const res=  await new Request().request({
-      headers: headers,
-      method: "POST",
-      requestBody: body,
-      url: url,
-    });
+      if (config.errCode) {
+        body.error = {
+          code: config.errCode,
+          message: config.errMessage || "Error occured",
+        };
+      }
 
+      const res = await new Request().request({
+        headers: headers,
+        method: "POST",
+        requestBody: body,
+        url: url,
+      });
 
-
-
-
-    return body;
+      return body;
     } catch (error) {
-  console.log(error)
+      console.log(error);
     }
-    
+  };
+
+  cmRequest = async (config: {
+    healthId: string;
+    consentId: string;
+    dateRange: {
+      from: string;
+      to: string;
+    };
+    publicKey: string;
+    expireDate: string;
+    nounce: string;
+    dataPushUrl: string;
+    errCode?: any;
+    errMessage?: any;
+  }) => {
+    try {
+      const headers = this.headers(config.healthId);
+      const url = `${this.baseUrl}gateway/v0.5/health-information/cm/request`;
+
+      const body: any = {
+        requestId: uuidv4(),
+        timestamp: new Date().toISOString(),
+        hiRequest: {
+          consent: {
+            id: config.consentId,
+            dateRange: config.dateRange,
+            dataPushUrl: config.dataPushUrl,
+            keyMaterial: {
+              cryptoAlg: "ECDH",
+              curve: "Curve25519",
+              dhPublicKey: {
+                expiry: config.expireDate,
+                parameters: "Curve25519/32byte random key",
+                keyValue: config.publicKey,
+              },
+              nonce: config.nounce,
+            },
+          },
+        },
+      };
+
+      if (config.errCode) {
+        body.error = {
+          code: config.errCode,
+          message: config.errMessage || "Error occured",
+        };
+      }
+
+      const res = await new Request().request({
+        headers: headers,
+        method: "POST",
+        requestBody: body,
+        url: url,
+      });
+
+      return body;
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
