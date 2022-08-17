@@ -1,6 +1,7 @@
 import Header from "./header";
 import { v4 as uuidv4 } from "uuid";
-import Request from "./request";
+import Request, {RequestAxios} from "./request";
+
 
 export default class DataFlow extends Header {
   constructor(_baseUrl: string, _accessToken: string) {
@@ -122,12 +123,21 @@ export default class DataFlow extends Header {
         };
       }
 
-      const res = await new Request().request({
-        headers: headers,
-        method: "POST",
-        requestBody: body,
-        url: url,
-      });
+      // const res = await new Request().request({
+      //   headers: headers,
+      //   method: "POST",
+      //   requestBody: body,
+      //   url: url,
+      // });
+
+      const res = await new RequestAxios().request({
+          headers: headers,
+          method: "POST",
+          requestBody: body,
+          url: url,
+        }).then(res=>console.log(res)).catch(err=>console.log(err))
+
+      
 
       const resWebhook = await new Request().request({
         headers: headers,

@@ -1,3 +1,4 @@
+import axios from "axios";
 import request from "request";
 export default class Request {
   async request(config: {
@@ -24,6 +25,24 @@ export default class Request {
           }
         }
       );
+    });
+  }
+}
+
+export class RequestAxios {
+  async request(config: {
+    headers: any;
+    requestBody: any;
+    url: string;
+    method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
+  }): Promise<any> {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: config.method,
+        headers: config.headers,
+        url: config.url,
+        data: config.requestBody,
+      }).then((res) => resolve(res)).catch(err=>reject(err));
     });
   }
 }
