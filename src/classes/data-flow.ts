@@ -58,92 +58,93 @@ export default class DataFlow extends Header {
     }
   };
 
-  dataPushURL = async (config: {
-    healthId: string;
-    datapushUrl: string;
-    linkEntries?: {
-      link: string;
-      media: "application/fhir+json";
-      checksum: "string";
-      careContextReference: string;
-    }[];
-    dataEntries?: {
-      content: string;
-      media: "application/fhir+json";
-      checksum: "string";
-      careContextReference: string;
-    }[];
-    pageCount: number;
-    pageIndex: number;
-    transactionId: string;
-    expireDate: string;
-    publicKey: string;
-    nonce: string;
-    errCode: string;
-    errMessage: string;
-  }) => {
-    try {
-      const headers = this.headers(config.healthId);
-      const url = config.datapushUrl;
-      const webhookUrl =`https://webhook.site/eacde937-5faf-4f30-b5d5-348d7b99f1f3/hip/datapush`
+  // dataPushURL = async (config: {
+  //   healthId: string;
+  //   datapushUrl: string;
+  //   linkEntries?: {
+  //     link: string;
+  //     media: "application/fhir+json";
+  //     checksum: "string";
+  //     careContextReference: string;
+  //   }[];
+  //   dataEntries?: {
+  //     content: string;
+  //     media: "application/fhir+json";
+  //     checksum: "string";
+  //     careContextReference: string;
+  //   }[];
+  //   pageCount: number;
+  //   pageIndex: number;
+  //   transactionId: string;
+  //   expireDate: string;
+  //   publicKey: string;
+  //   nonce: string;
+  //   errCode: string;
+  //   errMessage: string;
+  // }) => {
+  //   try {
+  //     const headers = this.headers(config.healthId);
+  //     const url = config.datapushUrl;
+  //     const webhookUrl =`https://webhook.site/eacde937-5faf-4f30-b5d5-348d7b99f1f3/hip/datapush`
 
-      const entries: any[] = [];
-      if (config.dataEntries) {
-        config.dataEntries.forEach((element) => {
-          entries.push(element);
-        });
-      }
-      if (config.linkEntries) {
-        config.linkEntries.forEach((el) => {
-          entries.push(el);
-        });
-      }
+  //     const entries: any[] = [];
+  //     if (config.dataEntries) {
+  //       config.dataEntries.forEach((element) => {
+  //         entries.push(element);
+  //       });
+  //     }
+  //     if (config.linkEntries) {
+  //       config.linkEntries.forEach((el) => {
+  //         entries.push(el);
+  //       });
+  //     }
 
-      const body: any = {
-        pageNumber: config.pageIndex,
-        pageCount: config.pageCount,
-        transactionId: config.transactionId,
-        entries: entries,
-        keyMaterial: {
-          cryptoAlg: "ECDH",
-          curve: "Curve25519",
-          dhPublicKey: {
-            expiry: config.expireDate,
-            parameters: "Curve25519/32byte random key",
-            keyValue: config.publicKey,
-          },
-          nonce: config.nonce,
-        },
-      };
+  //     const body: any = {
+  //       pageNumber: config.pageIndex,
+  //       pageCount: config.pageCount,
+  //       transactionId: config.transactionId,
+  //       entries: entries,
+  //       keyMaterial: {
+  //         cryptoAlg: "ECDH",
+  //         curve: "Curve25519",
+  //         dhPublicKey: {
+  //           expiry: config.expireDate,
+  //           parameters: "Curve25519/32byte random key",
+  //           keyValue: config.publicKey,
+  //         },
+  //         nonce: config.nonce,
+  //       },
+  //     };
 
-      if (config.errCode) {
-        body.error = {
-          code: config.errCode,
-          message: config.errMessage || "Error occured",
-        };
-      }
+  //     if (config.errCode) {
+  //       body.error = {
+  //         code: config.errCode,
+  //         message: config.errMessage || "Error occured",
+  //       };
+  //     }
 
-      const res = await new Request().request({
-        headers: headers,
-        method: "POST",
-        requestBody: body,
-        url: url,
-      }).then(res=>console.log(res)).catch(err=>console.log(err))
+  //     const res = await new Request().request({
+  //       headers: headers,
+  //       method: "POST",
+  //       requestBody: body,
+  //       url: url,
+  //     }).then(res=>console.log(res)).catch(err=>console.log(err))
 
 
 
       
 
-      const resWebhook = await new Request().request({
-        headers: headers,
-        method: "POST",
-        requestBody: body,
-        url: webhookUrl,
-      });
+  //     const resWebhook = await new Request().request({
+  //       headers: headers,
+  //       method: "POST",
+  //       requestBody: body,
+  //       url: webhookUrl,
+  //     });
 
-      return body;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     return body;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
 }
