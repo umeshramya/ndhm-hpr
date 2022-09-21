@@ -22,7 +22,9 @@ export default class Register {
             "clientSecret": this.clinetSecrete
         }
 
-        const url = `${this.baseUrl}gateway/v0.5/sessions`
+        // const url = `${this.baseUrl}gateway/v0.5/sessions` 
+        // In production this like above line
+        const url = `https://dev.abdm.gov.in/gateway/v0.5/sessions`
         const headers = {
             "Content-Type": "application/json"
         }
