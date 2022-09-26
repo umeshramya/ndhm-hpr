@@ -6,10 +6,12 @@ export default class Register {
     private clinetSecrete: string;
     private baseUrl: string;
 
-    constructor(_cleintId: string, _clientSecrete: string, _baseUrl: string = "https://dev.abdm.gov.in/") {
+    constructor(_cleintId: string, _clientSecrete: string, _baseUrl?: string ) {
         this.clientID = _cleintId;
         this.clinetSecrete = _clientSecrete;
-        this.baseUrl = _baseUrl;
+        // this.baseUrl = _baseUrl;
+        // this code had to be changed in prodcution
+        this.baseUrl = process.env.REGISTER_BASE_URL_NDHM  || `https://dev.abdm.gov.in/`
     }
 
     /**
@@ -22,9 +24,7 @@ export default class Register {
             "clientSecret": this.clinetSecrete
         }
 
-        // const url = `${this.baseUrl}gateway/v0.5/sessions` 
-        // In production this like above line
-        const url = `https://dev.abdm.gov.in/gateway/v0.5/sessions`
+        const url = `${this.baseUrl}gateway/v0.5/sessions` 
         const headers = {
             "Content-Type": "application/json"
         }
