@@ -91,24 +91,49 @@ export default class HealthInformation extends Header {
       const headers = this.headers(config.healthId);
       const url = `${this.baseUrl}gateway/v0.5/health-information/cm/request`;
 
-      const body: any = {
+      // const body: any = {
+      //   requestId: uuidv4(),
+      //   timestamp: new Date().toISOString(),
+      //   hiRequest: {
+      //     consent: {
+      //       id: config.consentId,
+      //       dateRange: config.dateRange,
+      //       dataPushUrl: config.dataPushUrl,
+      //       keyMaterial: {
+      //         cryptoAlg: "ECDH",
+      //         curve: "Curve25519",
+      //         dhPublicKey: {
+      //           expiry: config.expireDate,
+      //           parameters: "Curve25519/32byte random key",
+      //           keyValue: config.publicKey,
+      //         },
+      //         nonce: config.nounce,
+      //       },
+      //     },
+      //   },
+      // };
+
+      const body :any= {
         requestId: uuidv4(),
         timestamp: new Date().toISOString(),
         hiRequest: {
           consent: {
             id: config.consentId,
-            dateRange: config.dateRange,
-            dataPushUrl: config.dataPushUrl,
-            keyMaterial: {
-              cryptoAlg: "ECDH",
-              curve: "Curve25519",
-              dhPublicKey: {
-                expiry: config.expireDate,
-                parameters: "Curve25519/32byte random key",
-                keyValue: config.publicKey,
-              },
-              nonce: config.nounce,
+          },
+          dateRange: {
+            from: new Date(config.dateRange.from).toISOString(),
+            to: new Date(config.dateRange.to).toISOString(),
+          },
+          dataPushUrl: config.dataPushUrl,
+          keyMaterial: {
+            cryptoAlg: "ECDH",
+            curve: "Curve25519",
+            dhPublicKey: {
+              expiry: new Date(config.expireDate).toISOString(),
+              parameters: "Curve25519/32byte random key",
+              keyValue: config.publicKey,
             },
+            nonce: config.nounce,
           },
         },
       };
