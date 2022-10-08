@@ -120,16 +120,13 @@ export default class HealthInformation extends Header {
           consent: {
             id: config.consentId,
           },
-          dateRange: {
-            from: new Date(config.dateRange.from).toISOString(),
-            to: new Date(config.dateRange.to).toISOString(),
-          },
+          dateRange: config.dateRange,
           dataPushUrl: config.dataPushUrl,
           keyMaterial: {
             cryptoAlg: "ECDH",
             curve: "Curve25519",
             dhPublicKey: {
-              expiry: new Date(config.expireDate).toISOString(),
+              expiry: config.expireDate,
               parameters: "Curve25519/32byte random key",
               keyValue: config.publicKey,
             },
