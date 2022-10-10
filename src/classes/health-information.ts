@@ -91,7 +91,7 @@ export default class HealthInformation extends Header {
       const headers = this.headers(config.healthId);
       const url = `${this.baseUrl}gateway/v0.5/health-information/cm/request`;
 
-      const body :any= {
+      const body :HIU_CM_REQUEST= {
         requestId: uuidv4(),
         timestamp: new Date().toISOString(),
         hiRequest: {
@@ -133,3 +133,37 @@ export default class HealthInformation extends Header {
     }
   };
 }
+
+
+/**
+ * This interface is Cm_request decrypt keys
+ */
+export interface HIU_CM_REQUEST {
+  hiRequest: {
+    consent: {
+      id: string
+    }
+    dateRange: {
+      to: string
+      from: string
+    }
+    dataPushUrl: string
+    keyMaterial: {
+      curve: string
+      nonce: string
+      cryptoAlg: string
+      dhPublicKey: {
+        expiry: string
+        keyValue: string
+        parameters: string
+      }
+    }
+  }
+  requestId: string
+  timestamp: string;
+  error?: {
+    code: any,
+    message: any
+  }
+}
+

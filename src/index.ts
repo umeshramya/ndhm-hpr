@@ -7,7 +7,7 @@ import Profile from "./classes/profile";
 import AbhaNumber from "./classes/abha";
 import DataFlow from "./classes/data-flow";
 import Patients from "./classes/patients";
-import HealthInformation, {STATUS_RESPONSES_HEALTH_INFORMATION_NOTIFY} from "./classes/health-information";
+import HealthInformation, {HIU_CM_REQUEST, STATUS_RESPONSES_HEALTH_INFORMATION_NOTIFY} from "./classes/health-information";
 import ConsentRequest, {PurposeArray, CONSENTFLOW_REQUEST_INIT} from "./classes/consent-request";
 
 export {
@@ -24,5 +24,7 @@ export {
   ConsentRequest,
   Patients,
   PurposeArray,
+  HIU_CM_REQUEST,
   CONSENTFLOW_REQUEST_INIT
+  
 };
