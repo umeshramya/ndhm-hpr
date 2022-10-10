@@ -104,6 +104,53 @@ export default class ConsentFlow extends Header {
   };
 
 
+  onhiuNotify = async (config: {
+    healthId: string;
+    acknowledgement:      {
+      "status": "OK" | "UNKNOWN",
+      "consentId": string
+    }[];
+    requestId: string;
+    errCode?: string;
+    errMessage?: string;
+  }) => {
+    try {
+      const headers = this.headers(config.healthId);
+    const url = `${this.baseUrl}gateway/v0.5/consents/hiu/on-notify`;
+   
+    const body: any = {
+      requestId: uuidv4(),
+      timestamp: new Date().toISOString(),
+      "acknowledgement":config.acknowledgement,
+      "resp": {
+        "requestId": config.requestId
+      }
+    }
+
+    if (config.errCode) {
+      body.error = {
+        code: config.errCode,
+        message: config.errMessage || "Error occured",
+      };
+    }
+
+    const res=  await new Request().request({
+      headers: headers,
+      method: "POST",
+      requestBody: body,
+      url: url,
+    });
+
+
+
+    return body;
+    } catch (error) {
+  console.log(error)
+    }
+    
+  };
+
+
   
 
 
