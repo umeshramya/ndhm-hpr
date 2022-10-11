@@ -158,6 +158,10 @@ export interface HIU_CM_REQUEST {
         parameters: string
       }
     }
+    /**
+     * private key is only for local storage not be sent along api call
+     */
+    privateKey?:string
   }
   requestId: string
   timestamp: string;
