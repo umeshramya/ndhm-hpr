@@ -163,6 +163,7 @@ export interface HIU_CM_REQUEST {
      */
     privateKey?:string
     transactionId?:string
+    xhiuid?:string;
   }
   requestId: string
   timestamp: string;
