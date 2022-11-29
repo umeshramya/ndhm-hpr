@@ -166,6 +166,10 @@ export interface HIU_CM_REQUEST {
     xhiuid?:string;
     healthId?:string;
     status?:string
+    /**
+     * Consemtid
+     */
+    id?:string 
   }
   requestId: string
   timestamp: string;
