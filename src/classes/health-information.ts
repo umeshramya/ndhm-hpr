@@ -164,6 +164,8 @@ export interface HIU_CM_REQUEST {
     privateKey?:string
     transactionId?:string
     xhiuid?:string;
+    healthId?:string;
+    status?:string
   }
   requestId: string
   timestamp: string;
