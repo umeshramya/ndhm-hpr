@@ -12,7 +12,7 @@ export interface PATIENT_FIND {
     }
     
     requester: {
-      type:  requesterType[]
+      type:  requesterType
       id: string
     }
   }
