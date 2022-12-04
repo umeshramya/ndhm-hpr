@@ -2,6 +2,24 @@ import Header from "./header";
 import { v4 as uuidv4 } from "uuid";
 import Request from "./request";
 
+type requesterType = "HIU"| "HIP"
+export interface PATIENT_FIND {
+  requestId: string
+  timestamp: string
+  query: {
+    patient:  {
+      id: string
+    }
+    
+    requester: {
+      type:  requesterType[]
+      id: number
+    }
+  }
+}
+
+
+
 export default class Patients extends Header {
   constructor(_baseUrl: string, _accessToken: string) {
     super(_baseUrl, _accessToken);
@@ -66,8 +84,37 @@ export default class Patients extends Header {
     
   };
 
+  /**
+   * This API is meant for identify to patient given her consent-manager-user-id
+   * @param config 
+   * @param healthId 
+   * @returns 
+   */
+  find = async (
+    config: PATIENT_FIND,
+    healthId: string
+  ) => {
+    try {
+      const headers = this.headers(healthId);
+      const url = `${this.baseUrl}gateway/v0.5/patients/find`;
+      const body: PATIENT_FIND = {
+        ...config,
+        requestId: uuidv4(),
+        timestamp: new Date().toISOString(),
+      };
 
+      const res = await new Request().request({
+        headers: headers,
+        method: "POST",
+        requestBody: body,
+        url: url,
+      });
 
+      return body;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   
 
