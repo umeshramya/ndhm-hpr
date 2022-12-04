@@ -39,6 +39,33 @@ export interface CONSENTFLOW_REQUEST_INIT {
     };
   };
 }
+type categories ="LINK" | "DATA"
+export interface HIU_SUBSCRIPTION_REQUEST {
+  requestId: string
+  timestamp: string
+  subscription: {
+    purpose:  {
+      text: string
+      code: string
+      refUri: string
+    }
+    patient: {
+      id: string
+    }
+    hiu: {
+      id: string
+    }
+    hips?: {
+      id: string
+    }[]
+    categories: categories[]
+    period: {
+      from: string
+      to: string
+    }
+    
+  }
+}
 
 const puposeDisplay = PurposeArray.map((el) => el);
 type pouposeType = typeof puposeDisplay[number];
@@ -132,6 +159,35 @@ export default class ConsentRequest extends Header {
       console.log(error);
     }
   };
+/**
+ * creates a request for subscription. The subscription categories can be for care-contexts linkages or availability of data against existing care-contexts. Note that the requester must have HIU role
+ * @param config 
+ * @returns 
+ */
+  sunscriptionRequest = async (config: HIU_SUBSCRIPTION_REQUEST, healthId:string) => {
+    try {
+      const headers = this.headers(healthId);
+      const url = `${this.baseUrl}gateway/v0.5/subscription-requests/cm/init`;
+      const body: HIU_SUBSCRIPTION_REQUEST={
+        ...config,
+        "requestId" : uuidv4(),
+        "timestamp" :   new Date().toISOString(),
+      }
+
+      const res = await new Request().request({
+        headers: headers,
+        method: "POST",
+        requestBody: body,
+        url: url,
+      });
+
+      return body;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  
 
   status = async (config: { healthId: string; consentRequestId: string }) => {
     try {
@@ -157,3 +213,6 @@ export default class ConsentRequest extends Header {
     }
   };
 }
+
+
+
