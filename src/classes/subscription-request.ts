@@ -88,10 +88,10 @@ export default class SubscriptionRequest extends Header {
    * @param healthId 
    * @returns 
    */
-  sunscriptionRequest_ON_NOTIFY = async (config: HIU_SUBSCRIPTION_REQUEST_ON_NOTIFY, healthId:string) => {
+  sunscriptionRequestOnNotify = async (config: HIU_SUBSCRIPTION_REQUEST_ON_NOTIFY, healthId:string) => {
     try {
       const headers = this.headers(healthId);
-      const url = `${this.baseUrl}gateway/v0.5/subscription-requests/cm/init`;
+      const url = `${this.baseUrl}gateway/v0.5/subscription-requests/hiu/on-notify`;
       const body: HIU_SUBSCRIPTION_REQUEST_ON_NOTIFY={
         ...config,
         "requestId" : uuidv4(),
