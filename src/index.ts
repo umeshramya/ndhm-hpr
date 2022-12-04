@@ -9,6 +9,7 @@ import DataFlow from "./classes/data-flow";
 import Patients from "./classes/patients";
 import HealthInformation, {HIU_CM_REQUEST, STATUS_RESPONSES_HEALTH_INFORMATION_NOTIFY} from "./classes/health-information";
 import ConsentRequest, {PurposeArray, CONSENTFLOW_REQUEST_INIT} from "./classes/consent-request";
+import SubscriptionRequest, {HIU_SUBSCRIPTION_REQUEST, HIU_SUBSCRIPTION_REQUEST_ON_NOTIFY} from "./classes/subscription-request";
 
 export {
   Register,
@@ -25,6 +26,9 @@ export {
   Patients,
   PurposeArray,
   HIU_CM_REQUEST,
-  CONSENTFLOW_REQUEST_INIT
+  CONSENTFLOW_REQUEST_INIT,
+  HIU_SUBSCRIPTION_REQUEST, 
+  HIU_SUBSCRIPTION_REQUEST_ON_NOTIFY,
+  SubscriptionRequest
   
 };
