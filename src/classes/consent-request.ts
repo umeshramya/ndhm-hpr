@@ -25,8 +25,8 @@ export interface CONSENTFLOW_REQUEST_INIT {
   dataEraseAt: string;
   frequency: {
     unit: "HOUR";
-    value: 0;
-    repeats: 0;
+    value: number;
+    repeats: number;
   };
   accessMode: "VIEW" | "STORE" | "QUERY" | "STREAM";
   hiu: string;
