@@ -110,10 +110,9 @@ export default class Register {
         name:string;
         type:"HIU" | "HIP";
         active:boolean
-        alias : string
+        alias : string[]
     }):Promise<string>=>{
-        // https://dev.abdm.gov.in/devservice/v1/bridges/addUpdateServices
-        // gateway/v1/bridges/addUpdateServices
+
         const body = config
         const url = `${this.baseUrl}devservice/v1/bridges/addUpdateServices`
         const headers = {
