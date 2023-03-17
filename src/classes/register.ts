@@ -105,5 +105,26 @@ export default class Register {
     }
 
 
+    updatServices = async(accessToken:string,config:{
+        id:string;
+        name:string;
+        type:"HIU" | "HIP";
+        active:boolean
+    }):Promise<string>=>{
+        // https://dev.abdm.gov.in/devservice/v1/bridges/addUpdateServices
+        // gateway/v1/bridges/addUpdateServices
+        const body = config
+        const url = `${this.baseUrl}devservice/v1/bridges/addUpdateServices`
+        const headers = {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${accessToken}`
+        }
+        return new Request().request({
+            "headers": headers, "requestBody": body, method: "PUT", "url": url
+        })
+
+    }
+
+
 
 }
