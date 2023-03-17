@@ -111,7 +111,7 @@ export default class Register {
         type:"HIU" | "HIP";
         active:boolean
         alias : string[]
-    }):Promise<string>=>{
+    }):Promise<any>=>{
 
         const body = config
         const url = `${this.baseUrl}devservice/v1/bridges/addUpdateServices`
