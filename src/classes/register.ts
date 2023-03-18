@@ -112,9 +112,11 @@ export default class Register {
         active:boolean
         alias : string[]
     }):Promise<any>=>{
-
+        // gateway/v1/bridges/addUpdateServices 
         const body = config
-        const url = `${this.baseUrl}devservice/v1/bridges/addUpdateServices`
+        // const url = `${this.baseUrl}devservice/v1/bridges/addUpdateServices`
+        const url = `${this.baseUrl}gateway/v1/bridges/addUpdateServices`
+
         const headers = {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${accessToken}`
