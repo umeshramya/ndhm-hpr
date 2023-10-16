@@ -16,6 +16,7 @@ export default class Profile extends Header {
     errMessage?: string;
     requestId: string;
     healthId: string;
+    tokenNumber : string;
   }) => {
     const headers = this.headers(config.healthId);
     const url = `${this.baseUrl}gateway/v0.5/patients/profile/on-share`;
@@ -26,6 +27,7 @@ export default class Profile extends Header {
       acknowledgement: {
         status: "SUCCESS",
         healthId: config.healthId,
+        tokenNumber:config.tokenNumber
       },
       resp: {
         requestId: config.requestId,
