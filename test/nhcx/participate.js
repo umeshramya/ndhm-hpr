@@ -15,12 +15,8 @@ const participate = async ()=>{
     "publicKey" : process.env.NHCX_PUBLIC_KEY,
     "url" : process.env.NHCX_URL
   })
-
   return ret;
-  
 }
-
-
 
 const createProvider = async () => {
  
@@ -65,7 +61,7 @@ const createProvider = async () => {
 const createPayor = async () => {
   const curPart = await participate()
   const res = await curPart.create( {
-    "encryption_cert" : publicKey,
+    "encryption_cert" : process.env.NHCX_PUBLIC_KEY,
     "address" : {
       "description" : "Physical address of the facility including its geolocation",
       "default_address" : {
@@ -97,7 +93,7 @@ const createPayor = async () => {
     "district" : "Dharaead"
   });
 
-  console.log(res.data);
+  console.log(res);
 };
 
 const update =  async () => {
@@ -187,13 +183,24 @@ const getPlicies =async()=>{
   const res = await curPart.getPolicies({"identifiertype" : "MobileNo", "identifiervalue" : "9343403620"})
   console.log(res.data)
 }
+const updateCert = async ()=>{
+  const curPart = await participate()
+  const res = await curPart.participantCertUpdtae({
+    "encryptioncert" : process.env.NHCX_PUBLIC_KEY,
+    "endpointurl" : process.env.NHCX_ENDPOINT_URL,
+    "participantcode" : "1000000423@sbx"
+  })
+
+console.log(res)
+}
 // createProvider()
-// createPayor();
+createPayor();
 // update()
-getList()
+// getList()
 // getCert()
 // search()
 // getPlicies()
+// updateCert()
 
 
 // let encodedData = "MCowBQYDK2VwAyEAfeyB5GnUMnUeqPfW180FGS+s7N8dWmH6X4ZG2x9Vd/Y=";
