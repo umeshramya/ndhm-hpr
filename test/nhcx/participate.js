@@ -1,5 +1,9 @@
 const ndm = require("../../lib");
 const dotenv = require('dotenv')
+
+
+return
+
 dotenv.config()
 
 const { getToken } = require("../accessToken");
@@ -194,13 +198,13 @@ const updateCert = async ()=>{
 console.log(res)
 }
 // createProvider()
-createPayor();
+// createPayor();
 // update()
 // getList()
 // getCert()
 // search()
 // getPlicies()
-// updateCert()
+updateCert()
 
 
 // let encodedData = "MCowBQYDK2VwAyEAfeyB5GnUMnUeqPfW180FGS+s7N8dWmH6X4ZG2x9Vd/Y=";
