@@ -17,7 +17,7 @@ const participate = async ()=>{
     "privateKey" : process.env.NHCX_PRIVATE_KEY,
     "publicKey" : process.env.NHCX_PUBLIC_KEY,
     "publicKey" : process.env.NHCX_PUBLIC_KEY,
-    "url" : process.env.NHCX_URL
+    "url" : process.env.NHCX_PARTICIPANT_HCX_SERVICE_URL
   })
   return ret;
 }

@@ -1,6 +1,6 @@
 const NhcxOperations = Object.freeze({
-    COVERAGE_ELIGIBILITY_CHECK: "/coverageeligibility/check",
-    COVERAGE_ELIGIBILITY_ON_CHECK: "/coverageeligibility/on_check",
+    COVERAGE_ELIGIBILITY_CHECK: "/v1/coverageeligibility/check",
+    COVERAGE_ELIGIBILITY_ON_CHECK: "/v1/coverageeligibility/on_check",
     PRE_AUTH_SUBMIT: "/preauth/submit",
     PRE_AUTH_ON_SUBMIT: "/preauth/on_submit",
     CLAIM_SUBMIT: "/claim/submit",

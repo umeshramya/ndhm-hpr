@@ -2,12 +2,17 @@
 import { v4 as uuidv4 } from "uuid";
 import { JWEHelper } from "./utils/JWEHelper";
 import Constants from "./utils/Constants";
+import axios from "axios";
 export default class NhcxOutGoingRequest {
   private Constants: any;
   private participantCode: string;
-  constructor(options: { participantCode: string }) {
+  private protocolBasePath:string;
+  private accessToken:string
+  constructor(options: { participantCode: string, protocolBasePath:string, accessToken:string }) {
     this.Constants = new Constants();
     this.participantCode = options.participantCode;
+    this.protocolBasePath = options.protocolBasePath
+    this.accessToken = options.accessToken
   }
 
   private createHeader(options: {
@@ -32,7 +37,7 @@ export default class NhcxOutGoingRequest {
     return headers;
   }
 
-  async encryptPayload(options: {
+  private async encryptPayload(options: {
     fhirPayload: any;
     recipientCode: any;
     apiCallId?: any;
@@ -63,4 +68,48 @@ export default class NhcxOutGoingRequest {
       );
     }
   }
+
+
+ private  async initializeHCXCall(operation: any, jwePayload: any, accessToken:string) {
+    try {
+      const url = `${this.protocolBasePath}${operation}`;
+      const payload = JSON.stringify({ payload: jwePayload, });
+      const headers = {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      };
+      try {
+        const response = await axios.post(url, payload, { headers });
+        return response.data;
+      } catch (e) {
+        console.error(`Initialize HCX: ${e}`);
+      }
+    } catch (error) {
+      console.error(`Initialize HCX: ${error}`);
+    }
+  }
+
+
+  async process(options:{fhirPayload: any, recipientCode: any, operation: any, apiCallId: any, correlationId: any, workflowId: any, receipantPublicCert:any }) {
+    try {
+      const encryptedPayload = await this.encryptPayload({
+        "apiCallId" : options.apiCallId,
+        "correlationId" : options.correlationId,
+        "fhirPayload" : options.fhirPayload,
+        "receipantPublicCert" : options.receipantPublicCert,
+        "recipientCode" : options.recipientCode,
+        "workflowId" : options.workflowId
+      });
+      const response = await this.initializeHCXCall(options.operation, encryptedPayload,this.accessToken);
+      return {
+        payload: encryptedPayload,
+        response,
+      };
+    } catch (error) {
+      console.error(`Error in process: ${error}`);
+
+      throw new Error("Processing failed.");
+    }
+  }
+
 }
