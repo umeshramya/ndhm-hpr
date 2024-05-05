@@ -11,7 +11,7 @@ import HealthInformation, {HIU_CM_REQUEST, STATUS_RESPONSES_HEALTH_INFORMATION_N
 import ConsentRequest, {PurposeArray, CONSENTFLOW_REQUEST_INIT} from "./classes/consent-request";
 import SubscriptionRequest, {HIU_SUBSCRIPTION_REQUEST, HIU_SUBSCRIPTION_REQUEST_ON_NOTIFY} from "./classes/subscription-request";
 import Subscriptions, {HIU_SUBSCRIPTIONS_ON_NOTIFY}  from "./classes/subscriptions";
-import Participant from "./classes/hcx/Particpant";
+import Participant from "./classes/nhcx/Particpant";
 export {
   Register,
   UserAuth,
