@@ -2,7 +2,6 @@ const ndm = require("../../lib");
 const dotenv = require('dotenv')
 
 
-return
 
 dotenv.config()
 
@@ -151,9 +150,9 @@ const getList = async ()=>{
 const getCert  = async()=>{
   // const accessToken = await getToken();
 
-  // let  id="1000000301@sbx"
+  let  id="1000000121@sbx"
   // id = "1000000578@sbx"
-  id= "1000000423@sbx"
+  // id= "1000000423@sbx"
   const curPart = await participate()
   const res = await curPart.fetchCert(id)
 

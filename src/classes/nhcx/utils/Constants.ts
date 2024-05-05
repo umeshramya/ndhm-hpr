@@ -1,9 +1,12 @@
 export default class Constants {
     HCX_SENDER_CODE = "x-hcx-sender_code";
     HCX_RECIPIENT_CODE = "x-hcx-recipient_code";
-    HCX_API_CALL_ID = "x-hcx-api_call_id";
+    HCX_API_CALL_ID = "x-hcx-request_id";
     HCX_CORRELATION_ID = "x-hcx-correlation_id";
     WORKFLOW_ID = "x-hcx-workflow_id";
+    /**request.initiate request.retry response.success response.fail response.sender_not_supported response.unhandled
+response.request_retry */
+    HCX_STATUS = "x-hcx-status"
     HCX_TIMESTAMP = "x-hcx-timestamp";
     STATUS = "x-hcx-status";
     ALG = "alg";
