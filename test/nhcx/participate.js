@@ -147,22 +147,20 @@ const getList = async ()=>{
     //  console.log(res.data.participantdetails.filter(el=> el.participantcode == "1000000590@sbx"))
 }
 
-const getCert  = async()=>{
-  // const accessToken = await getToken();
+ const getCert  = async(id)=>{
 
-  let  id="1000000121@sbx"
-  // id = "1000000578@sbx"
-  // id= "1000000423@sbx"
   const curPart = await participate()
   const res = await curPart.fetchCert(id)
 
   const data = res.encryption_cert;
-  console.log(data)
-  // const buffer = Buffer.from(data, 'binary');
+  
+  // console.log(data)
+  return data
+  const buffer = Buffer.from(data, 'binary');
 
 // Encode the buffer to base64
-// const base64Encoded = buffer.toString('base64');
-
+const base64Encoded = buffer.toString('base64');
+return base64Encoded
 // console.log(base64Encoded);
   
 }
@@ -196,14 +194,19 @@ const updateCert = async ()=>{
 
 console.log(res)
 }
+
+let  id="1000000121@sbx"
+// id = "1000000578@sbx"
+// id= "1000000423@sbx"
 // createProvider()
 // createPayor();
 // update()
 // getList()
-// getCert()
+
+// getCert(id)
 // search()
 // getPlicies()
-updateCert()
+// updateCert()
 
 
 // let encodedData = "MCowBQYDK2VwAyEAfeyB5GnUMnUeqPfW180FGS+s7N8dWmH6X4ZG2x9Vd/Y=";
@@ -211,6 +214,6 @@ updateCert()
 
 // console.log(decodedData);
 
-
+module.exports={getCert}
 
 

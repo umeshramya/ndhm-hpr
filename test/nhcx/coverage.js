@@ -1,4 +1,5 @@
 const ndm = require("../../lib");
+const {getCert} = require('./participate')
 const dotenv = require('dotenv')
 
 dotenv.config()
@@ -333,48 +334,17 @@ const fhirPayload={
   }
 
 const outGoing = async()=>{
-    const cert=`
-    -----BEGIN CERTIFICATE-----
-    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
-    hnptBv8=
-    -----END CERTIFICATE-----
-    `
+    const recipientCode = "1000000251@sbx" //"1000000121@sbx"
+
+    let curCert = await getCert(recipientCode);
+    console.log(curCert)
     const curCov = await coverage()
 
     const res = await curCov.process({
         "fhirPayload" : fhirPayload,
         "operation" : operation.COVERAGE_ELIGIBILITY_CHECK,
-        "receipantPublicCert" : cert,
-        "recipientCode" : "1000000121@sbx",
+        "receipantPublicCert" : curCert,
+        "recipientCode" : recipientCode,
         "xHcxStatus" : "request.initiate"
 
     })
