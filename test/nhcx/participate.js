@@ -133,7 +133,7 @@ const update =  async () => {
 
     });
   
-    console.log(res.data);
+    console.log(res);
   };
 
 
@@ -165,11 +165,8 @@ return base64Encoded
   
 }
 
-const search  = async()=>{
+const search  = async(id)=>{
 
-  // let  id="1000000301@sbx"
-  // id= "1000000578@sbx"
-  id= "1000000423@sbx"
   const curPart = await participate()
   res = await curPart.search(id);
 
@@ -195,7 +192,7 @@ const updateCert = async ()=>{
 console.log(res)
 }
 
-let  id="1000000121@sbx"
+let  id="1000000423@sbx"
 // id = "1000000578@sbx"
 // id= "1000000423@sbx"
 // createProvider()
@@ -204,7 +201,7 @@ let  id="1000000121@sbx"
 // getList()
 
 // getCert(id)
-// search()
+// search(id)
 // getPlicies()
 // updateCert()
 

@@ -46,4 +46,5 @@ export {
 
 export { default as Participant} from "./classes/nhcx/Particpant";
 export { default as NhcxOutGoingRequest } from "./classes/nhcx/hcx_outgoing"
+export {default as NhcxIncommingRequest} from "./classes/nhcx/hcx_incomming"
 export {default as Nhcx_opertions} from "./classes/nhcx/utils/Nhcx_opertions"

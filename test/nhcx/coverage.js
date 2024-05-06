@@ -334,7 +334,7 @@ const fhirPayload={
   }
 
 const outGoing = async()=>{
-    const recipientCode = "1000000251@sbx" //"1000000121@sbx"
+    const recipientCode = "1000000423@sbx" //"1000000121@sbx"
 
     let curCert = await getCert(recipientCode);
     console.log(curCert)
@@ -349,7 +349,7 @@ const outGoing = async()=>{
 
     })
 
-    // console.log(res)
+    console.log(res)
 
 }
 
