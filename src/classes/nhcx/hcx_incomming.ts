@@ -1,8 +1,10 @@
 import Constants from "./utils/Constants";
 import { JWEHelper } from "./utils/JWEHelper";
 
+import jose from "node-jose";
+const { JWK, JWE, parse } = jose;
+
 export default class NhcxIncommingRequest {
-  private participantCode: string;
   private encryptionPrivateKey: string;
   private Constants: Constants;
   private output: any;
@@ -10,11 +12,10 @@ export default class NhcxIncommingRequest {
   private payload: any;
 
   constructor(options: {
-    participantCode: string;
     encryptionPrivateKey: string;
   }) {
     this.encryptionPrivateKey = options.encryptionPrivateKey;
-    this.participantCode = options.participantCode;
+
     this.headers = null;
     this.payload = null;
     this.output = {};
@@ -39,15 +40,19 @@ export default class NhcxIncommingRequest {
     }
   }
 
-  async process(payload: any, operation: string) {
-    this.validateRequest(payload);
+  async process(options:{payload: any, publicCert:string, privateKey:string}) {
+    // this.validateRequest(payload);
+
     let decryptedPayload = await JWEHelper.decrypt({
-      cert: this.encryptionPrivateKey,
-      payload: payload,
+      privateKey: options.privateKey,
+      publicCert:options.publicCert,
+      payload: options.payload.payload,
     });
-    let header = decryptedPayload.header;
-    this.output[this.Constants.HEADERS] = header;
-    this.output[this.Constants.PAYLOAD] = decryptedPayload.payload;
-    return this.output;
+
+    return decryptedPayload
+
   }
+
+
+  
 }

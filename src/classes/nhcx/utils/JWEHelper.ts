@@ -14,30 +14,25 @@ export class JWEHelper {
     const alg ="RSA-OAEP-256"
     if (!(options.cert && options.headers && options.payload)) throw new Error("Invalid Input");
     let key = await JWK.asKey(options.cert, "pem");
+    console.log( "key.kid", key.kid)
     const buffer = Buffer.from(JSON.stringify(options.payload));
     const fields = { alg, ...options.headers };
     const encrypted = await JWE.createEncrypt(
       { format, contentAlg, fields },
       key
     )
-      .update(buffer)
+      .update(JSON.stringify(options.payload))
       .final();
     return encrypted;
   }
 
-  static async decrypt(options : { cert:any, payload:any }) {
+  static async decrypt(options: { privateKey: string, payload: string, publicCert:string }) {
+    if (!(options.privateKey && options.payload)) throw new Error("Invalid Input");
+  
+    const privateKey = await jose.JWK.asKey(options.privateKey, 'pem');
+    const decrypted = await jose.JWE.createDecrypt(privateKey).decrypt(options.payload);
 
-    if (!(options.cert && options.payload)) throw new Error("Invalid Input");
-    let keystore = JWK.createKeyStore();
-    await keystore.add(await JWK.asKey(options.cert, "pem"));
-    let parsedPayload = parse.compact(options.payload);
-    let decrypted = await parsedPayload.perform(keystore);
-    const payloadString = decrypted.payload.toString();
-    const payloadMap = JSON.parse(payloadString);
-    decrypted.payload = payloadMap;
-    // @ts-ignore
-    const { key, plaintext, protected: _, ...rest } = decrypted;
-
-    return rest;
+    return decrypted.payload.toString();
   }
+  
 }

@@ -334,9 +334,15 @@ const fhirPayload={
   }
 
 const outGoing = async()=>{
-    const recipientCode = "1000000423@sbx" //"1000000121@sbx"
+    const recipientCode ="1000000423@sbx"// "1000000121@sbx" // 
 
-    let curCert = await getCert(recipientCode);
+    const fs = require("fs")
+
+    const publicCert = fs.readFileSync("./keys/public_cert.pem", 'utf8');
+
+
+    // let curCert = await getCert(recipientCode);
+    curCert = publicCert
     console.log(curCert)
     const curCov = await coverage()
 
