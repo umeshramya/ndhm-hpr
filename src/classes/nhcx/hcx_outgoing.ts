@@ -136,7 +136,7 @@ export default class NhcxOutGoingRequest {
         workflowId: options.workflowId,
         xHcxStatus : options.xHcxStatus
       });
-  
+
       const response = await this.initializeHCXCall(
         options.operation,
         encryptedPayload?.encrypted,

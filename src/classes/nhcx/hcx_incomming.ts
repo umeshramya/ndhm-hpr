@@ -45,11 +45,15 @@ export default class NhcxIncommingRequest {
 
     let decryptedPayload = await JWEHelper.decrypt({
       privateKey: options.privateKey,
-      publicCert:options.publicCert,
       payload: options.payload.payload,
     });
 
-    return decryptedPayload
+   let ret = JSON.parse(decryptedPayload)
+   if( ret && ret.type == "Buffer" ){
+    ret = JSON.parse(Buffer.from(ret).toString("utf8"))
+  }
+
+  return ret
 
   }
 

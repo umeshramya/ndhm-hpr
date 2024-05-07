@@ -182,9 +182,12 @@ const getPlicies =async()=>{
   console.log(res.data)
 }
 const updateCert = async ()=>{
+  const fs = require("fs")
+  const publicCert = fs.readFileSync("./keys/public_cert.pem", 'utf8');
+
   const curPart = await participate()
   const res = await curPart.participantCertUpdtae({
-    "encryptioncert" : process.env.NHCX_PUBLIC_KEY,
+    "encryptioncert" : publicCert,
     "endpointurl" : process.env.NHCX_ENDPOINT_URL,
     "participantcode" : "1000000423@sbx"
   })
@@ -203,7 +206,7 @@ let  id="1000000423@sbx"
 // getCert(id)
 // search(id)
 // getPlicies()
-// updateCert()
+updateCert()
 
 
 // let encodedData = "MCowBQYDK2VwAyEAfeyB5GnUMnUeqPfW180FGS+s7N8dWmH6X4ZG2x9Vd/Y=";
