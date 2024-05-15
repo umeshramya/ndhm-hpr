@@ -1,5 +1,5 @@
 import Constants from "./utils/Constants";
-import { JWEHelper } from "./utils/JWEHelper";
+import  JWEHelper from "./utils/JWEHelper";
 
 import jose from "node-jose";
 const { JWK, JWE, parse } = jose;

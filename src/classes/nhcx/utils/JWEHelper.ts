@@ -2,7 +2,7 @@ import jose from "node-jose";
 const { JWK, JWE, parse } = jose;
 import axios from "axios";
 
-export class JWEHelper {
+export default class JWEHelper {
   static async encrypt(options: {
     cert: any,
     headers: any,

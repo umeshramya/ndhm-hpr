@@ -43,7 +43,7 @@ export {
 };
 
 
-
+export {default as JWEHelper} from "./classes/nhcx/utils/JWEHelper"
 export { default as Participant} from "./classes/nhcx/Particpant";
 export { default as NhcxOutGoingRequest } from "./classes/nhcx/hcx_outgoing"
 export {default as NhcxIncommingRequest} from "./classes/nhcx/hcx_incomming"
