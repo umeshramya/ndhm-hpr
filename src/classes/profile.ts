@@ -19,7 +19,8 @@ export default class Profile extends Header {
     tokenNumber : string;
   }) => {
     const headers = this.headers(config.healthId);
-    const url = `${this.baseUrl}gateway/v0.5/patients/profile/on-share`;
+    // const url = `${this.baseUrl}gateway/v0.5/patients/profile/on-share`;
+    const url = `${this.baseUrl}gateway/1.0/patients/profile/on-share`;
    
     const body: any = {
       requestId: uuidv4(),
