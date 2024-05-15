@@ -1,0 +1,13 @@
+{
+  "version": "v1",
+  "packages": {
+    "ndhm-hpr": {
+      "signature": "4c3d33d93e7cc492c3bcc56ecae1747e",
+      "file": true
+    },
+    "ndhm-hrp": {
+      "signature": "2ab09272607468c58a739ac9c998cae0",
+      "file": true
+    }
+  }
+}

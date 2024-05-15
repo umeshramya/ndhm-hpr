@@ -1,6 +1,6 @@
 {
   "name": "ndhm-hrp",
-  "version": "2.2.1",
+  "version": "2.2.0",
   "description": "This is ndhm-hpr",
   "main": "lib/index.js",
   "directories": {
@@ -8,23 +8,12 @@
   },
   "dependencies": {
     "axios": "^0.23.0",
-    "jose": "^5.2.4",
     "moment": "^2.29.1",
-    "node-jose": "^2.2.0",
-    "node-rsa": "^1.1.1",
     "request": "^2.88.2",
     "uuid": "^8.3.2"
   },
-  "devDependencies": {
-    "@types/node-jose": "^1.1.13",
-    "@types/request": "^2.48.7",
-    "@types/uuid": "^8.3.1",
-    "dotenv": "^16.4.5",
-    "typescript": "^4.4.4"
-  },
   "scripts": {
-    "dev": "tsc",
-    "build": "tsc"
+    "dev": "tsc && yalc publish && cd test &&  yalc add ndhm-hrp && yalc update ndhm-hrp && npm run dev"
   },
   "repository": {
     "type": "git",
@@ -42,5 +31,6 @@
   "homepage": "https://github.com/umeshramya/ndhm-hrp#readme",
   "files": [
     "lib/**/*"
-  ]
+  ],
+  "yalcSig": "2ab09272607468c58a739ac9c998cae0"
 }
