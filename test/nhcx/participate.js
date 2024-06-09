@@ -21,45 +21,65 @@ const participate = async ()=>{
   return ret;
 }
 
-const createProvider = async () => {
- 
-  const curPart = await participate()
-  const res = await curPart.create({
-    participant_name: `Jeevan Jyoti Hospital`,
-    primaryEmail: `umeshbilagi@gmail.com`,
-    phone: ["9343403620"],
-    registryid: `IN2910000001`,
-   "state" : "Karanataka",
-   "roles" : ["10001"],
-   "encryption_cert" : process.env.NHCX_PUBLIC_KEY,
-   "district" : "DHarawad",
-       "address" : {
-      "description" : "Physical address of the facility including its geolocation",
-      "default_address" : {
-        "city" : "Hubli",
-        "country" : "India",
-        "description" : "Default address details",
-        "postal_code" : "580020",
-        "state" : "Karnataka",
-        "street" : "HNo 11, Near pilley school",
+// const createProvider = async () => {
+//  console.log(process.env.NHCX_PARTICIPANT_HCX_SERVICE_URL)
+//   const curPart = await participate()
+//   const res = await curPart.create({
+//     participant_name: `Jeevan Jyoti Hospital`,
+//     primaryEmail: `umeshbilagi@gmail.com`,
+//     phone: ["9343403620"],
+//     registryid: `IN2910000001`,
+//    "state" : "Karanataka",
+//    "roles" : ["10001"],
+//    "encryption_cert" : process.env.NHCX_PUBLIC_KEY,
+//    "district" : "DHarawad",
+//        "address" : {
+//       "description" : "Physical address of the facility including its geolocation",
+//       "default_address" : {
+//         "city" : "Hubli",
+//         "country" : "India",
+//         "description" : "Default address details",
+//         "postal_code" : "580020",
+//         "state" : "Karnataka",
+//         "street" : "HNo 11, Near pilley school",
         
-      }
-    },
-    "scheme_code" : "PMJAY",
-    "payment_details" : {
-      "description" : "Default payment details (UPI or A/C Number + IFSC Code)",
-      "default_payment" : {
-        "description" : "Default payment details",
-        "account_number" : "1234567788",
-        "ifsc_code" : "DFG123",
-        "UPI" : "246567289@ybl"
-      }
-    },
+//       }
+//     },
+//     "scheme_code" : "PMJAY",
+//     "payment_details" : {
+//       "description" : "Default payment details (UPI or A/C Number + IFSC Code)",
+//       "default_payment" : {
+//         "description" : "Default payment details",
+//         "account_number" : "1234567788",
+//         "ifsc_code" : "DFG123",
+//         "UPI" : "246567289@ybl"
+//       }
+//     },
    
-  });
+//   });
 
-  console.log(res);
-};
+//   console.log(res);
+// };
+
+const createProviderV2 = async () => {
+ try {
+  const curPart = await participate()
+  const res = await curPart.createV2({
+   "email" : "umehsbilagi@gmail.com",
+   "registryid" : "IN2910000001",
+   "role" : "10001",
+   "mobilenumber" : "9343403620",
+   // "registrytype" : "HFR",
+   "endpointurl" : process.env.NHCX_ENDPOINT_URL
+  })
+ } catch (error) {
+  console.log(error)
+ }
+
+ 
+  
+ };
+ 
 
 const createPayor = async () => {
   const curPart = await participate()
@@ -198,7 +218,7 @@ console.log(res)
 let  id="1000000423@sbx"
 // id = "1000000578@sbx"
 // id= "1000000423@sbx"
-// createProvider()
+createProviderV2()
 // createPayor();
 // update()
 // getList()
@@ -206,7 +226,7 @@ let  id="1000000423@sbx"
 // getCert(id)
 // search(id)
 // getPlicies()
-updateCert()
+// updateCert()
 
 
 // let encodedData = "MCowBQYDK2VwAyEAfeyB5GnUMnUeqPfW180FGS+s7N8dWmH6X4ZG2x9Vd/Y=";

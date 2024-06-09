@@ -103,6 +103,11 @@ export default class Participant {
       this.endpointUrl = options.endpointUrl;
   }
 
+  /**
+   * @depricated
+   * @param options 
+   * @returns 
+   */
   async create(options: CREATE_OPTIONS): Promise<{participant_code: string;}> 
   {
     if (!options.endpoint_url) {
@@ -120,6 +125,32 @@ export default class Participant {
     return resp.data;
   }
 
+
+  async createV2(options:{
+  
+      "registrytype"?: string
+      "registryid": string,
+      "role": Role,
+      "endpointurl": string,
+      "mobilenumber": string,
+      "email": string
+    
+  }){
+    if (!options.endpointurl) {
+      options.endpointurl = this.endpointUrl;
+    }
+
+    const resp: any = await axios.post(
+      `${this.url}/v2/participant/create`,
+      options,
+      {
+        headers: this.heeder as any,
+      }
+    );
+
+    return resp.data;
+
+  }
   async update(options: UPDATE_OPTION) {
     if (!options.endpoint_url) {
       options.endpoint_url = this.endpointUrl;
