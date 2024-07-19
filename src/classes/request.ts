@@ -8,7 +8,7 @@ export default class Request {
     method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
   }): Promise<any> {
     const body = JSON.stringify(config.requestBody);
-    config.url = config.url.replace("https://nha-suma-azb7fa3pfa-el.a.run.app/gateway/", "https://nha-suma-azb7fa3pfa-el.a.run.app/")
+    config.url = config.url.replace("https://nha-suma-azb7fa3pfa-el.a.run.app/", "https://nha-suma-azb7fa3pfa-el.a.run.app/")
 
 
     return new Promise((resolve, reject) => {

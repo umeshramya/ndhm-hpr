@@ -32,7 +32,7 @@ export default class HealthInformation extends Header {
   }) => {
     try {
       const headers = this.headers(config.healthId);
-      const url = `${this.baseUrl}gateway/v0.5/health-information/notify`;
+      const url = `${this.baseUrl}v0.5/health-information/notify`;
 
       const body: any = {
         requestId: uuidv4(),
@@ -89,7 +89,7 @@ export default class HealthInformation extends Header {
   }) => {
     try {
       const headers = this.headers(config.healthId);
-      const url = `${this.baseUrl}gateway/v0.5/health-information/cm/request`;
+      const url = `${this.baseUrl}v0.5/health-information/cm/request`;
 
       const body :HIU_CM_REQUEST= {
         requestId: uuidv4(),

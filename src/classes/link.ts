@@ -30,7 +30,7 @@ export default class Link extends Header {
     careContextDisplay: string;
   }) => {
     const headers = this.headers(config.healthId);
-    const url = `${this.baseUrl}gateway/v0.5/links/link/add-contexts`;
+    const url = `${this.baseUrl}v0.5/links/link/add-contexts`;
     const body = {
       requestId: uuidv4(),
       timestamp: new Date().toISOString(),
@@ -85,7 +85,7 @@ Care context reference numbers are invalid
     };
   }) => {
     const headers = this.headers(config.healthId);
-    const url = `${this.baseUrl}gateway/v0.5/links/link/on-init`;
+    const url = `${this.baseUrl}v0.5/links/link/on-init`;
     const body: any = {
       requestId: uuidv4(),
       timestamp: new Date().toISOString(),
@@ -143,8 +143,8 @@ Care context reference numbers are invalid
     };
   }) => {
     const headers = this.headers(config.healthId);
-    const url = `${this.baseUrl}gateway/v0.5/links/link/on-confirm`;
-    const devurl = `https://webhook.site/2bbc9a81-e5ec-4555-bb83-c211974df004/gateway/v0.5/links/link/on-confirm`;
+    const url = `${this.baseUrl}v0.5/links/link/on-confirm`;
+    const devurl = `https://webhook.site/2bbc9a81-e5ec-4555-bb83-c211974df004/v0.5/links/link/on-confirm`;
 
     const body: any = {
       requestId: uuidv4(),
@@ -199,7 +199,7 @@ Care context reference numbers are invalid
     hipId: string;
   }) => {
     const headers = this.headers(config.healthId);
-    const url = `${this.baseUrl}gateway/v0.5/links/context/notify`;
+    const url = `${this.baseUrl}v0.5/links/context/notify`;
 
     const body = {
       requestId: uuidv4(),

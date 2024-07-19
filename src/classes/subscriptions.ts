@@ -36,7 +36,7 @@ export default class Subscriptions extends Header {
   ) => {
     try {
       const headers = this.headers(healthId);
-      const url = `${this.baseUrl}gateway/v0.5/subscriptions/hiu/on-notify`;
+      const url = `${this.baseUrl}v0.5/subscriptions/hiu/on-notify`;
       const body: HIU_SUBSCRIPTIONS_ON_NOTIFY = {
         ...config,
         requestId: uuidv4(),

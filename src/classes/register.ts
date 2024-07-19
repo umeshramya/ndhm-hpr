@@ -12,6 +12,7 @@ export default class Register {
         // this.baseUrl = _baseUrl;
         // this code had to be changed in prodcution
         this.baseUrl = process.env.REGISTER_BASE_URL_NDHM  || `https://dev.abdm.gov.in/`
+    
     }
 
     /**
@@ -24,7 +25,8 @@ export default class Register {
             "clientSecret": this.clinetSecrete
         }
 
-        const url = `${this.baseUrl}gateway/v0.5/sessions` 
+        const url = `${this.baseUrl}v0.5/sessions` 
+        console.log(url)
         const headers = {
             "Content-Type": "application/json"
         }
@@ -112,10 +114,10 @@ export default class Register {
         active:boolean
         alias : string[]
     }):Promise<any>=>{
-        // gateway/v1/bridges/addUpdateServices 
+        // v1/bridges/addUpdateServices 
         const body = config
         // const url = `${this.baseUrl}devservice/v1/bridges/addUpdateServices`
-        const url = `${this.baseUrl}gateway/v1/bridges/addUpdateServices`
+        const url = `${this.baseUrl}v1/bridges/addUpdateServices`
 
         const headers = {
             "Content-Type": "application/json",

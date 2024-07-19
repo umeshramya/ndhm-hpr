@@ -44,7 +44,7 @@ export default class Patients extends Header {
   }) => {
     try {
       const headers = this.headers(config.healthId);
-    const url = `${this.baseUrl}gateway/v0.5/patients/sms/notify2`;
+    const url = `${this.baseUrl}v0.5/patients/sms/notify2`;
    
     const body: any = {
       requestId: uuidv4(),
@@ -96,7 +96,7 @@ export default class Patients extends Header {
   ) => {
     try {
       const headers = this.headers(healthId);
-      const url = `${this.baseUrl}gateway/v0.5/patients/find`;
+      const url = `${this.baseUrl}v0.5/patients/find`;
       const body: PATIENT_FIND = {
         ...config,
         requestId: uuidv4(),

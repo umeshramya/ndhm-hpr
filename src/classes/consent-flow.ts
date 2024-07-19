@@ -22,7 +22,7 @@ export default class ConsentFlow extends Header {
   }) => {
     try {
       const headers = this.headers(config.healthId);
-    const url = `${this.baseUrl}gateway/v0.5/consents/hip/on-notify`;
+    const url = `${this.baseUrl}v0.5/consents/hip/on-notify`;
    
     const body: any = {
       requestId: uuidv4(),
@@ -72,7 +72,7 @@ export default class ConsentFlow extends Header {
   }) => {
     try {
       const headers = this.headers(config.healthId);
-    const url = `${this.baseUrl}gateway/v0.5/consents/fetch`;
+    const url = `${this.baseUrl}v0.5/consents/fetch`;
    
     const body: any = {
       requestId: uuidv4(),
@@ -116,7 +116,7 @@ export default class ConsentFlow extends Header {
   }) => {
     try {
       const headers = this.headers(config.healthId);
-    const url = `${this.baseUrl}gateway/v0.5/consents/hiu/on-notify`;
+    const url = `${this.baseUrl}v0.5/consents/hiu/on-notify`;
    
     const body: any = {
       requestId: uuidv4(),

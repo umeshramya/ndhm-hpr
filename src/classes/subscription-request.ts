@@ -62,7 +62,7 @@ export default class SubscriptionRequest extends Header {
   sunscriptionRequest = async (config: HIU_SUBSCRIPTION_REQUEST, healthId:string) => {
     try {
       const headers = this.headers(healthId);
-      const url = `${this.baseUrl}gateway/v0.5/subscription-requests/cm/init`;
+      const url = `${this.baseUrl}v0.5/subscription-requests/cm/init`;
       const body: HIU_SUBSCRIPTION_REQUEST={
         ...config,
         "requestId" : uuidv4(),
@@ -91,7 +91,7 @@ export default class SubscriptionRequest extends Header {
   sunscriptionRequestOnNotify = async (config: HIU_SUBSCRIPTION_REQUEST_ON_NOTIFY, healthId:string) => {
     try {
       const headers = this.headers(healthId);
-      const url = `${this.baseUrl}gateway/v0.5/subscription-requests/hiu/on-notify`;
+      const url = `${this.baseUrl}v0.5/subscription-requests/hiu/on-notify`;
       const body: HIU_SUBSCRIPTION_REQUEST_ON_NOTIFY={
         ...config,
         "requestId" : uuidv4(),

@@ -23,7 +23,7 @@ export default class DataFlow extends Header {
   }) => {
     try {
       const headers = this.headers(config.healthId);
-      const url = `${this.baseUrl}gateway/v0.5/health-information/hip/on-request`;
+      const url = `${this.baseUrl}v0.5/health-information/hip/on-request`;
 
       const body: any = {
         requestId: uuidv4(),

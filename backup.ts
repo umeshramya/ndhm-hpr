@@ -10,7 +10,7 @@ export default class Patient {
     }
 
     hipVerifyPatinetByHealthId = async (accessToken: string, healthId: string, hipId: string, hipType: string): Promise<any> => {
-        const url = `${this.baseUrl}gateway/v0.5/users/auth/fetch-modes`;
+        const url = `${this.baseUrl}v0.5/users/auth/fetch-modes`;
         const headers = {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${accessToken}`,
