@@ -71,7 +71,7 @@ export default class ConsentRequest extends Header {
   init = async (config: CONSENTFLOW_REQUEST_INIT) => {
     try {
       const headers = this.headers(config.healthId);
-      const url = `${this.baseUrl}gateway/v0.5/consent-requests/init`;
+      const url = `${this.baseUrl}v0.5/consent-requests/init`;
 
       const body: any = {
         requestId: uuidv4(),
@@ -146,7 +146,7 @@ export default class ConsentRequest extends Header {
   status = async (config: { healthId: string; consentRequestId: string }) => {
     try {
       const headers = this.headers(config.healthId);
-      const url = `${this.baseUrl}gateway/v0.5/consent-requests/status`;
+      const url = `${this.baseUrl}v0.5/consent-requests/status`;
 
       const body: any = {
         requestId: uuidv4(),

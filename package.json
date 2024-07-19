@@ -1,6 +1,6 @@
 {
   "name": "ndhm-hrp",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "This is ndhm-hpr",
   "main": "lib/index.js",
   "directories": {
