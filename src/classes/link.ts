@@ -144,8 +144,7 @@ Care context reference numbers are invalid
   }) => {
     const headers = this.headers(config.healthId);
     const url = `${this.baseUrl}v0.5/links/link/on-confirm`;
-    const devurl = `https://webhook.site/2bbc9a81-e5ec-4555-bb83-c211974df004/v0.5/links/link/on-confirm`;
-
+    
     const body: any = {
       requestId: uuidv4(),
       timestamp: new Date().toISOString(),
@@ -171,12 +170,7 @@ Care context reference numbers are invalid
       url: url,
     });
 
-    await new Request().request({
-      headers: headers,
-      method: "POST",
-      requestBody: body,
-      url: devurl,
-    });
+
     return body;
   };
 
