@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import request from "request";
 export default class Request {
   async request(config: {
@@ -8,8 +8,13 @@ export default class Request {
     method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
   }): Promise<any> {
     const body = JSON.stringify(config.requestBody);
-    config.url = config.url.replace("https://nha-suma-azb7fa3pfa-el.a.run.app/", "https://nha-suma-azb7fa3pfa-el.a.run.app/")
-
+    const requestBody =        {
+      headers: config.headers,
+      body: body,
+      url: config.url,
+      method: config.method,
+    }
+  
 
     return new Promise((resolve, reject) => {
       request(
@@ -21,8 +26,10 @@ export default class Request {
         },
         (err, res) => {
           if (err) {
+            console.log("ABDM request sent", JSON.stringify(requestBody), "ERROR", JSON.stringify(err))
             reject(err);
           } else {
+            console.log("ABDM request sent", JSON.stringify(requestBody), "responce", JSON.stringify(res))
             resolve(res);
           }
         }
