@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
 const roles = [
   "10001",
@@ -14,52 +14,23 @@ const roles = [
 type Role = (typeof roles)[number];
 
 interface CREATE_OPTIONS {
-  linked_registry_codes?: string[];
-  registryid?: string;
+  linked_registry_codes: string[];
+  registryid: string;
   participant_name: string;
-  /** Required for only payers expple "PMJAY" */
-  scheme_code?: string;
+  scheme_code: string;
   state: string;
   district: string;
-  roles?: Role[];
+  roles: string[];
   primaryEmail: string;
-  additionalEmail?: string[];
-  phone?: string[];
-  additionalMobile?: string[];
+  phone: string[];
   primaryMobile: string;
-  signing_cert_path?: string;
-  encryption_cert?: string;
-  endpoint_url?: string;
-  address: {
-    description: "Physical address of the facility including its geolocation";
-    default_address: {
-      description: "Default address details";
-      street: string;
-      city: string;
-      state: string;
-      postal_code?: string;
-      country: string;
-      latitude?: string;
-      longitude?: string;
-    };
-  };
-
-  payment_details: {
-    description: "Default payment details (UPI or A/C Number + IFSC Code)";
-    default_payment: {
-      description: "Default payment details";
-      UPI: string;
-      account_number: string;
-      ifsc_code: string;
-    };
-  };
+  signing_cert_path: string;
+  encryption_cert: string;
+  endpoint_url: string;
 }
 
-const orgStatus = ["Created", "Active", "InActive", "Blocked"] as const;
-type OrgStatus = (typeof orgStatus)[number];
 interface UPDATE_OPTION extends CREATE_OPTIONS {
   participant_code: string;
-  status: OrgStatus[];
 }
 
 interface RequestHeaders {
@@ -69,11 +40,8 @@ interface RequestHeaders {
   bearer_auth: string;
 }
 export default class Participant {
-  private url = ""
-  private privateKey = ""
-  private publicKey = ""
-  private endpointUrl = ""
-
+  private url = "";
+  private endpointUrl = "";
   private accessToken: string = "";
   private heeder: RequestHeaders = {
     Accept: "application/json",
@@ -85,8 +53,6 @@ export default class Participant {
   constructor(options: {
     _accessToken: string;
     url: string;
-    privateKey: string;
-    publicKey: string;
     endpointUrl: string;
   }) {
     this.accessToken = options._accessToken;
@@ -96,61 +62,34 @@ export default class Participant {
       uid: uuidv4(),
       bearer_auth: `Bearer ${this.accessToken}`,
     };
-      this.url = options.url;
-      this.privateKey = options.privateKey;
-      this.publicKey = options.publicKey;
-      this.url = options.url;
-      this.endpointUrl = options.endpointUrl;
+    this.url = options.url;
+    this.url = options.url;
+    this.endpointUrl = options.endpointUrl;
   }
 
   /**
    * @depricated
-   * @param options 
-   * @returns 
+   * @param options
+   * @returns
    */
-  async create(options: CREATE_OPTIONS): Promise<{participant_code: string;}> 
-  {
-    if (!options.endpoint_url) {
-      options.endpoint_url = this.endpointUrl;
+  async create(options: CREATE_OPTIONS) {
+   if(!options.endpoint_url){
+    options.endpoint_url = this.endpointUrl
+   }
+
+   const resp: any = await axios.post(
+    `${this.url}/participant/create`,
+    options,
+    {
+      headers: this.heeder as any,
     }
+  );
 
-    const resp: any = await axios.post(
-      `${this.url}/participant/create`,
-      options,
-      {
-        headers: this.heeder as any,
-      }
-    );
-
-    return resp.data;
+  return resp.data;
   }
 
 
-  async createV2(options:{
-  
-      "registrytype"?: string
-      "registryid": string,
-      "role": Role,
-      "endpointurl": string,
-      "mobilenumber": string,
-      "email": string
-    
-  }){
-    if (!options.endpointurl) {
-      options.endpointurl = this.endpointUrl;
-    }
 
-    const resp: any = await axios.post(
-      `${this.url}/v2/participant/create`,
-      options,
-      {
-        headers: this.heeder as any,
-      }
-    );
-
-    return resp.data;
-
-  }
   async update(options: UPDATE_OPTION) {
     if (!options.endpoint_url) {
       options.endpoint_url = this.endpointUrl;
