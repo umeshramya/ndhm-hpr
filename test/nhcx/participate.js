@@ -153,7 +153,7 @@ const updateCert = async () => {
 
 let  id="1000003415@hcx"
 
-// createProvider();
+createProvider();
 
 // createPayor();
 // update()
@@ -161,7 +161,7 @@ let  id="1000003415@hcx"
 
 // getCert(id)
 // search(id)
-getPlicies()
+// getPlicies()
 // updateCert()
 
 // let encodedData = "MCowBQYDK2VwAyEAfeyB5GnUMnUeqPfW180FGS+s7N8dWmH6X4ZG2x9Vd/Y=";

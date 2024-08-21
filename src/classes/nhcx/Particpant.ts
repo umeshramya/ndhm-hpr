@@ -62,8 +62,7 @@ export default class Participant {
       uid: uuidv4(),
       bearer_auth: `Bearer ${this.accessToken}`,
     };
-    this.url = options.url;
-    this.url = options.url;
+    this.url = `${options.url}/participanthcxservice`;
     this.endpointUrl = options.endpointUrl;
   }
 
