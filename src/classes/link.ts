@@ -9,7 +9,9 @@ type HI_TYPES =
   | "ImmunizationRecord"
   | "DischargeSummary"
   | "HealthDocumentRecord"
-  | "WellnessRecord";
+  | "WellnessRecord"
+  | "InitialAssessment" // not part abdm
+  
 
 export default class Link extends Header {
   constructor(_baseUrl: string, _accessToken: string) {
