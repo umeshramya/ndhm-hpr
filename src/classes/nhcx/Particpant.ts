@@ -25,7 +25,7 @@ interface CREATE_OPTIONS {
   phone: string[];
   primaryMobile: string;
   signing_cert_path: string;
-  encryption_cert: string;
+  encryption_cert: string;//base64 string
   endpoint_url: string;
 }
 
