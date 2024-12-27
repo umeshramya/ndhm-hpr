@@ -56,8 +56,6 @@ export default class JWEHelper {
       // Extract and parse the decrypted plaintext
       const payloadString = decrypted.plaintext.toString();
       const payloadObject = JSON.parse(payloadString);
-  
-      console.log("Decrypted Payload:", payloadObject);
       return payloadObject;
     } catch (error) {
       console.error("Decryption failed:", error);
