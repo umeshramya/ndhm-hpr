@@ -87,23 +87,38 @@ const createProvider = async () => {
   //   Buffer.from(public_certicate, 'utf-8').toString('base64'),
   // });
 
-  const res = await curPart.create({
-    district: 'Dharwad',
-    state: 'KARNATAKA',
-    // endpoint_url: 'https://webhook.site/bed8c046-90e4-4add-b7dd-f17576d3abd6/api/callback',
-    linked_registry_codes: [ '10001' ],
-    participant_name: 'Jeevan Jyoti Hospital',
-    phone: [ '09343403620' ],
-    primaryEmail: 'umeshbilagi@gmail.com',
-    primaryMobile: '9343403620',
-    registryid: 'IN2910000001',
-    roles: [ '10001' ],
-    scheme_code: 'PMJAY',
-    signing_cert_path: 'www.nicehms.com/api/hcx/public-key',
-    encryption_cert: 'LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCiAgICBNSUlENlRDQ0F0R2dBd0lCQWdJVU1hd0xtQlNhSVZUOStIRHkzOG1ZQ0E1QlB4NHdEUVlKS29aSWh2Y05BUUVMCiAgICBCUUF3Z1p3eEN6QUpCZ05WQkFZVEFrbE9NUkl3RUFZRFZRUUlEQWxMWVhKdVlYUmhhMkV4RVRBUEJnTlZCQWNNCiAgICBDRWgxWW1KaGJHeHBNUkF3RGdZRFZRUUtEQWRPYVdObFNFMVRNUkF3RGdZRFZRUUxEQWRPYVdObFNFMVRNU0F3CiAgICBIZ1lEVlFRRERCZG9kSFJ3YzB3dkwzZDNkeTV1YVdObGFHMXpMbU52YlRFZ01CNEdDU3FHU0liM0RRRUpBUllSCiAgICBZV1J0YVc1QWJtbGpaV2h0Y3k1amIyMHdIaGNOTWpReE1qSXlNRGt5TWpNeFdoY05NalV4TWpJeU1Ea3lNak14CiAgICBXakNCbkRFTE1Ba0dBMVVFQmhNQ1NVNHhFakFRQmdOVkJBZ01DVXRoY201aGRHRnJZVEVSTUE4R0ExVUVCd3dJCiAgICBTSFZpWW1Gc2JHa3hFREFPQmdOVkJBb01CMDVwWTJWSVRWTXhFREFPQmdOVkJBc01CMDVwWTJWSVRWTXhJREFlCiAgICBCZ05WQkFNTUYyaDBkSEJ6VEM4dmQzZDNMbTVwWTJWb2JYTXVZMjl0TVNBd0hnWUpLb1pJaHZjTkFRa0JGaEZoCiAgICBaRzFwYmtCdWFXTmxhRzF6TG1OdmJUQ0NBU0l3RFFZSktvWklodmNOQVFFQkJRQURnZ0VQQURDQ0FRb0NnZ0VCCiAgICBBSk9SWHNCdmw1Y1N5b3RSL0ppNW50d1FxYXhDMENONEFHSE0vS25TV2lnME0rNFE2QmN2NVVFSytEZjVHT21mCiAgICAvYUpQOVBJN1hkUEwxczFPL21Sck1tNzNzbnFLYUd3U1ZSeGE2eGVVV2ZiaTRkdDQ0a2VIY051SEpld2RnSVZkCiAgICBKVUg5czVMSnovbkVoVGE0OVdrVW90cEtiK05zemNGUHRKdEpCVHh5eWY3VW9GMVNwV2pXT3Vla1lRemtkaDI4CiAgICBKb3V5Q1QrWk4xS3FodGk3OWV4VTBPN285OGgyOUVZSFpxaG5UWGcyd05CN3cxbzk2aklMVHhoZlAwb3pDV3BWCiAgICBURUU2alhLWHNWWG0rZkYwaVBiNFJtN3FMV1BYRXJ0VTluUm9UUmloSGpRY1NLaEYxNjN0SGNXemNaL3VqaFFyCiAgICAyMVU5NUd3dXZhaUwrZHpiVUR0MHE2MENBd0VBQWFNaE1COHdIUVlEVlIwT0JCWUVGSyszbTBCZnRUUHV2WVJlCiAgICAxRVJRb0tOaFlCT3VNQTBHQ1NxR1NJYjNEUUVCQ3dVQUE0SUJBUUJycTRLU1FyMGZkaDh6MTVsUTRaRmZCTk45CiAgICAzeVpRRXM1cnpvNi9hakdDNU1MOE8rT1Jjb0lIa05mVWx1aTE2bEdKOVpILzZycHRTV21HT3YzYzE3Z1YwL2dPCiAgICBNK0VheEY0Y3FiZWFpQXg5ZXBabU05ZVJId3FMK20xVjBhZlFyaW5yOHJybmc2S0Z6RTNIcFlQL1Q2NUNjNXRCCiAgICBVaElpMkxOTVlnZjErcXBvMVBXbXdsTVpYQVhaUUdCcVdMVm9EWHZSazZPalp5VDFMZDhoQ0doREY0LzFQbUNyCiAgICBHTjZ3dERtVUJsY2R0VXpwUWxwdlkzN2lJZXNJOVBkYmhTV1F5ZnRHaUszbnd4K2lsaEZoelhSeEdlY2QvVlRKCiAgICBWLzZZb0hhQWZWZm51ekE4Q2FpUzBFNlU2VEVmdHZXTm9EdjVWakVUR3M2T3QxVndiNEZqeXdlWFRPRUwKICAgIC0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0='
-  })
+  // const res = await curPart.create({
+  //   district: 'Dharwad',
+  //   state: 'KARNATAKA',
+  //   // endpoint_url: 'https://webhook.site/bed8c046-90e4-4add-b7dd-f17576d3abd6/api/callback',
+  //   linked_registry_codes: [ '10001' ],
+  //   participant_name: 'Jeevan Jyoti Hospital',
+  //   phone: [ '09343403620' ],
+  //   primaryEmail: 'umeshbilagi@gmail.com',
+  //   primaryMobile: '9343403620',
+  //   registryid: 'IN2910000001',
+  //   roles: [ '10001' ],
+  //   scheme_code: 'PMJAY',
+  //   signing_cert_path: 'www.nicehms.com/api/hcx/public-key',
+  //   encryption_cert: 'LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCiAgICBNSUlENlRDQ0F0R2dBd0lCQWdJVU1hd0xtQlNhSVZUOStIRHkzOG1ZQ0E1QlB4NHdEUVlKS29aSWh2Y05BUUVMCiAgICBCUUF3Z1p3eEN6QUpCZ05WQkFZVEFrbE9NUkl3RUFZRFZRUUlEQWxMWVhKdVlYUmhhMkV4RVRBUEJnTlZCQWNNCiAgICBDRWgxWW1KaGJHeHBNUkF3RGdZRFZRUUtEQWRPYVdObFNFMVRNUkF3RGdZRFZRUUxEQWRPYVdObFNFMVRNU0F3CiAgICBIZ1lEVlFRRERCZG9kSFJ3YzB3dkwzZDNkeTV1YVdObGFHMXpMbU52YlRFZ01CNEdDU3FHU0liM0RRRUpBUllSCiAgICBZV1J0YVc1QWJtbGpaV2h0Y3k1amIyMHdIaGNOTWpReE1qSXlNRGt5TWpNeFdoY05NalV4TWpJeU1Ea3lNak14CiAgICBXakNCbkRFTE1Ba0dBMVVFQmhNQ1NVNHhFakFRQmdOVkJBZ01DVXRoY201aGRHRnJZVEVSTUE4R0ExVUVCd3dJCiAgICBTSFZpWW1Gc2JHa3hFREFPQmdOVkJBb01CMDVwWTJWSVRWTXhFREFPQmdOVkJBc01CMDVwWTJWSVRWTXhJREFlCiAgICBCZ05WQkFNTUYyaDBkSEJ6VEM4dmQzZDNMbTVwWTJWb2JYTXVZMjl0TVNBd0hnWUpLb1pJaHZjTkFRa0JGaEZoCiAgICBaRzFwYmtCdWFXTmxhRzF6TG1OdmJUQ0NBU0l3RFFZSktvWklodmNOQVFFQkJRQURnZ0VQQURDQ0FRb0NnZ0VCCiAgICBBSk9SWHNCdmw1Y1N5b3RSL0ppNW50d1FxYXhDMENONEFHSE0vS25TV2lnME0rNFE2QmN2NVVFSytEZjVHT21mCiAgICAvYUpQOVBJN1hkUEwxczFPL21Sck1tNzNzbnFLYUd3U1ZSeGE2eGVVV2ZiaTRkdDQ0a2VIY051SEpld2RnSVZkCiAgICBKVUg5czVMSnovbkVoVGE0OVdrVW90cEtiK05zemNGUHRKdEpCVHh5eWY3VW9GMVNwV2pXT3Vla1lRemtkaDI4CiAgICBKb3V5Q1QrWk4xS3FodGk3OWV4VTBPN285OGgyOUVZSFpxaG5UWGcyd05CN3cxbzk2aklMVHhoZlAwb3pDV3BWCiAgICBURUU2alhLWHNWWG0rZkYwaVBiNFJtN3FMV1BYRXJ0VTluUm9UUmloSGpRY1NLaEYxNjN0SGNXemNaL3VqaFFyCiAgICAyMVU5NUd3dXZhaUwrZHpiVUR0MHE2MENBd0VBQWFNaE1COHdIUVlEVlIwT0JCWUVGSyszbTBCZnRUUHV2WVJlCiAgICAxRVJRb0tOaFlCT3VNQTBHQ1NxR1NJYjNEUUVCQ3dVQUE0SUJBUUJycTRLU1FyMGZkaDh6MTVsUTRaRmZCTk45CiAgICAzeVpRRXM1cnpvNi9hakdDNU1MOE8rT1Jjb0lIa05mVWx1aTE2bEdKOVpILzZycHRTV21HT3YzYzE3Z1YwL2dPCiAgICBNK0VheEY0Y3FiZWFpQXg5ZXBabU05ZVJId3FMK20xVjBhZlFyaW5yOHJybmc2S0Z6RTNIcFlQL1Q2NUNjNXRCCiAgICBVaElpMkxOTVlnZjErcXBvMVBXbXdsTVpYQVhaUUdCcVdMVm9EWHZSazZPalp5VDFMZDhoQ0doREY0LzFQbUNyCiAgICBHTjZ3dERtVUJsY2R0VXpwUWxwdlkzN2lJZXNJOVBkYmhTV1F5ZnRHaUszbnd4K2lsaEZoelhSeEdlY2QvVlRKCiAgICBWLzZZb0hhQWZWZm51ekE4Q2FpUzBFNlU2VEVmdHZXTm9EdjVWakVUR3M2T3QxVndiNEZqeXdlWFRPRUwKICAgIC0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0='
+  // })
 
-  console.log(res);
+
+  try {
+    const res = await curPart.v2Create({
+      "email" :"ramyakalyanpur@gmail.com",
+      "endpointurl": this.endpointUrl,
+      "mobilenumber" : "9343403620",
+      "registryid" :  "IN2910004474",
+      "registrytype" : "10001",
+      "role" : ["10001"]
+    })
+  
+    console.log(res);
+  } catch (error) {
+    console.log(error)
+  }
+
 };
 
 const createPayor = async () => {
@@ -145,25 +160,39 @@ const createPayor = async () => {
 
 const update = async () => {
   const curPart = await participate();
-  const res = await curPart.update({
-    "participant_code" : "1000003415@hcx",
-    linked_registry_codes: ["10001"],
-    registryid: "IN291000002909",
-    participant_name: "Jeevan Jyoti Hospital",
-    scheme_code: "PMJAY",
-    state: "Karnataka",
-    district: "Dharawad",
-    roles: ["10001"],
-    primaryEmail: "umeshbilagi@gmail.com",
-    phone: ["9343403620"],
-    primaryMobile: "9343403620",
-    signing_cert_path: "www.nicehms.com/api/hcx/public-key",
-    encryption_cert:
-      Buffer.from(public_certicate, "utf-8").toString("base64"),
-    endpoint_url: "webhook.site/e68c983f-7b9f-4d9f-8136-535ff81c0120",
-  });
+  // const res = await curPart.update({
+  //   "participant_code" : "1000003415@hcx",
+  //   linked_registry_codes: ["10001"],
+  //   registryid: "IN291000002909",
+  //   participant_name: "Jeevan Jyoti Hospital",
+  //   scheme_code: "PMJAY",
+  //   state: "Karnataka",
+  //   district: "Dharawad",
+  //   roles: ["10001"],
+  //   primaryEmail: "umeshbilagi@gmail.com",
+  //   phone: ["9343403620"],
+  //   primaryMobile: "9343403620",
+  //   signing_cert_path: "www.nicehms.com/api/hcx/public-key",
+  //   encryption_cert:
+  //     Buffer.from(public_certicate, "utf-8").toString("base64"),
+  //   endpoint_url: "webhook.site/e68c983f-7b9f-4d9f-8136-535ff81c0120",
+  // });
 
-  console.log(res);
+
+
+  try {
+    
+    const res = await curPart.v2Update({
+      "participantcode": "IN2910004474@hcx",
+      "encryptioncert" : this.endpointUrl,
+      "encryptioncert": Buffer.from(public_certicate, "utf-8").toString("base64"),
+    })
+    console.log(res);
+  } catch (error) {
+   console.log(error) 
+  }
+
+
 };
 
 const getList = async () => {
@@ -225,11 +254,11 @@ let  id="1000003538@hcx"
 // createProvider();
 
 // createPayor();
-// update()
+update()
 // getList()
 
 // getCert(id)
-search(id)
+// search(id)
 // getPlicies()
 // updateCert()
 

@@ -13,6 +13,18 @@ const roles = [
 ] as const;
 export type Role = (typeof roles)[number];
 
+export interface ParticipantCreateV2Request {
+  registrytype: string; // Type of registry (required)
+  registryid: string; // Unique identifier for the registry (required)
+  role: {
+    roles: string[]; // Array of roles assigned to the participant
+    example?: string; // Example of a role (optional)
+    enum: number[]; // Enumeration of role values
+  };
+  endpointurl: string; // Default endpoint to make API calls (required)
+  mobilenumber: string; // Mobile number with constraints (required)
+  email: string; // Email address (required)
+}
 
 export interface NHCX_PARTICIPANT {
   participant_code: string; // Unique identifier of the participant on the HCX instance
@@ -62,8 +74,16 @@ export interface CREATE_OPTIONS {
   phone: string[];
   primaryMobile: string;
   signing_cert_path: string;
-  encryption_cert: string;//base64 string
+  encryption_cert: string; //base64 string
   endpoint_url: string;
+}
+
+
+interface Validate{
+    participant_code: string,
+    status: string,
+    transactionid: string
+  
 }
 
 export interface UPDATE_OPTION extends CREATE_OPTIONS {
@@ -109,22 +129,56 @@ export default class Participant {
    * @returns
    */
   async create(options: CREATE_OPTIONS) {
-   if(!options.endpoint_url){
-    options.endpoint_url = this.endpointUrl
-   }
-
-   const resp: any = await axios.post(
-    `${this.url}/participant/create`,
-    options,
-    {
-      headers: this.heeder as any,
+    if (!options.endpoint_url) {
+      options.endpoint_url = this.endpointUrl;
     }
-  );
 
-  return resp.data;
+    const resp: any = await axios.post(
+      `${this.url}/participant/create`,
+      options,
+      {
+        headers: this.heeder as any,
+      }
+    );
+
+    return resp.data;
   }
 
+  async v2Create(options: ParticipantCreateV2Request) {
+    if (!options.endpointurl) {
+      options.endpointurl = this.endpointUrl;
+    }
 
+    const resp: any = await axios.post(
+      `${this.url}/v2/participant/create`,
+      options,
+      {
+        headers: this.heeder as any,
+      }
+    );
+
+    return resp.data;
+  }
+
+  async v2Update(options: {
+    participantcode: string; //participant code
+    encryptioncert: string; //public key certificate in base64
+    endpointurl: string; //endpoint or bridge url
+  }) {
+    if (!options.endpointurl) {
+      options.endpointurl = this.endpointUrl;
+    }
+
+    const resp: any = await axios.post(
+      `${this.url}/v2/participant/update`,
+      options,
+      {
+        headers: this.heeder as any,
+      }
+    );
+
+    return resp.data;
+  }
 
   async update(options: UPDATE_OPTION) {
     if (!options.endpoint_url) {
@@ -250,4 +304,74 @@ export default class Participant {
     );
     return resp.data;
   }
+
+  /**
+   * Validates the participant's passcode using the provided transaction ID.
+   *
+   * @param {Object} options - Validation options.
+   * @param {string} options.transactionId - Transaction ID from V2Create method.
+   * @param {string} options.passcode - Passcode sent to the participant's registered mobile number.
+   * @returns {Promise<Validate>} -Returns the validation.status or result as a string..
+   * @throws {Error} - Throws an error if the API call fails.
+   */
+  async ValidateCreate(options: {
+    transactionId: string;
+    passcode: string;
+  }): Promise<Validate> {
+    const axios = require("axios");
+
+    try {
+      const config = {
+        method: "get",
+        maxBodyLength: Infinity,
+        url: `${this.url}/validate?transactionId=${options.transactionId}&passcode=${options.passcode}`,
+        headers: {
+          Accept: "application/json",
+        },
+      };
+
+      const response = await axios.request(config); // Await the Axios request
+      return response.data; // Return the API response
+    } catch (error: any) {
+      console.error("Validation Error:", error.message || error);
+      throw Error(`Validation failed: ${error.message || "Unknown error"}`);
+    }
+  }
+
+  /**
+ * Validates the update request by checking the participant's transaction ID and passcode.
+ *
+ * This method communicates with the `/update/validate` endpoint of the registry API.
+ * The passcode is expected to be sent to the participant's registered mobile number.
+ *
+ * @param {Object} options - Validation options.
+ * @param {string} options.transactionId - Transaction ID associated with the participant's update request.
+ * @param {string} options.passcode - Passcode sent to the participant's registered mobile number.
+ * @returns {Promise<Validate>} - Returns the validation.status or result as a string.
+ * @throws {Error} - Throws an error if the validation fails or if the API request encounters an issue.
+ */
+async validateUpdate(options: { transactionId: string; passcode: string }): Promise<Validate> {
+  const axios = require("axios"); // Import Axios library
+
+  // Axios request configuration
+  const config = {
+    method: "get",
+    maxBodyLength: Infinity,
+    url: `${this.url}/update/validate?transactionId=${options.transactionId}&passcode=${options.passcode}`,
+    headers: {
+      Accept: "application/json", // Specify expected response type
+    },
+  };
+
+  try {
+    // Await API response
+    const response = await axios.request(config);
+    return response.data; // Return validation result from API
+  } catch (error: any) {
+    // Log and throw a meaningful error
+    console.error("Validation Error:", error.message || error);
+    throw Error(`Validation failed: ${error.message || "Unknown error"}`);
+  }
+}
+
 }
