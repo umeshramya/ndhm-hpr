@@ -92,6 +92,19 @@ interface RequestHeaders {
   uid: string;
   bearer_auth: string;
 }
+
+
+export interface PolicesList {
+  sno: string;
+  abhanumber: string;
+  mobilenumber: string;
+  memberid: string;
+  payerid: string;
+  productid: string;
+  productname: string;
+  processingid: string;
+}
+
 export default class Participant {
   private url = "";
   private endpointUrl = "";
@@ -102,6 +115,8 @@ export default class Participant {
     uid: uuidv4(),
     bearer_auth: `Bearer ${this.accessToken}`,
   };
+
+  
 
   constructor(options: {
     _accessToken: string;
@@ -265,12 +280,7 @@ export default class Participant {
   async getPolicies(options: {
     identifiertype: "MobileNo" | "AbhaNumber" | "MemberId";
     identifiervalue: string;
-  }): Promise<{
-    participantdetails: {
-      participantcode: string;
-      participantname: string;
-    }[];
-  }> {
+  }): Promise<PolicesList[]> {
     const resp: any = await axios.post(
       `${this.url}/participant/get/policies`,
       options,

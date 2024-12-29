@@ -230,8 +230,8 @@ const getPlicies = async () => {
   const curPart = await participate();
   const res = await curPart.getPolicies({
     identifiertype: "AbhaNumber",
-    identifiervalue: "917113576778608",
-  });
+    identifiervalue: "59457654551034",
+  }).catch(err=>console.log(err));
   console.log(res.data);
 };
 const updateCert = async () => {
@@ -251,7 +251,7 @@ const updateCert = async () => {
 let  id="1000003538@hcx"
 // 1000003415@hcx
 // 1000003415@hcx
-createProvider();
+// createProvider();
 
 // createPayor();
 // update()
@@ -259,7 +259,7 @@ createProvider();
 
 // getCert(id)
 // search(id)
-// getPlicies()
+getPlicies()
 // updateCert()
 
 // let encodedData = "MCowBQYDK2VwAyEAfeyB5GnUMnUeqPfW180FGS+s7N8dWmH6X4ZG2x9Vd/Y=";
