@@ -109,7 +109,7 @@ const createProvider = async () => {
       "email" :"ramyakalyanpur@gmail.com",
       "endpointurl": this.endpointUrl,
       "mobilenumber" : "9343403620",
-      "registryid" :  "IN2910004474",
+      "registryid" :  "IN2910000010",
       "registrytype" : "10001",
       "role" : ["10001"]
     })
@@ -251,10 +251,10 @@ const updateCert = async () => {
 let  id="1000003538@hcx"
 // 1000003415@hcx
 // 1000003415@hcx
-// createProvider();
+createProvider();
 
 // createPayor();
-update()
+// update()
 // getList()
 
 // getCert(id)

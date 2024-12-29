@@ -16,11 +16,7 @@ export type Role = (typeof roles)[number];
 export interface ParticipantCreateV2Request {
   registrytype: string; // Type of registry (required)
   registryid: string; // Unique identifier for the registry (required)
-  role: {
-    roles: string[]; // Array of roles assigned to the participant
-    example?: string; // Example of a role (optional)
-    enum: number[]; // Enumeration of role values
-  };
+  role: string[];
   endpointurl: string; // Default endpoint to make API calls (required)
   mobilenumber: string; // Mobile number with constraints (required)
   email: string; // Email address (required)
