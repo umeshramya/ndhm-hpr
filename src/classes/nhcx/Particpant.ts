@@ -288,7 +288,7 @@ export default class Participant {
         headers: this.heeder as any,
       }
     );
-    return resp;
+    return resp.data;
   }
 
   /**
