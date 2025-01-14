@@ -46,5 +46,5 @@ export {
 export {default as JWEHelper} from "./classes/nhcx/JWEHelper"
 export { default as Participant} from "./classes/nhcx/Particpant";
 
-export { HcxProtectedHeaders } from "./classes/nhcx/interfaces";
+export { HcxProtectedHeaders, NhcxApiResponse } from "./classes/nhcx/interfaces";
 

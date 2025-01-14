@@ -20,3 +20,25 @@ export const HcxStatus = [
   }
 
 
+  interface Error {
+    code: string;
+    message: string;
+  }
+  
+  interface StatusResponseObject {
+    sender_code: string;
+    recipient_code: string;
+    entity_type: 'coverageeligibility' | 'predetermination' | 'preauth' | 'claim' | 'task' | 'payment' | 'insuranceplan';
+    protocol_status: 'request.queued' | 'request.error' | 'request.dispatched';
+  }
+  
+  export interface NhcxApiResponse {
+    timestamp: string;
+    api_call_id: string; // UUID format
+    correlation_id: string; // UUID format
+    result: StatusResponseObject;
+    error?: Error; // Optional
+  }
+  
+
+
