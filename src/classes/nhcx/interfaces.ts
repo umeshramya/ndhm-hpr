@@ -28,7 +28,7 @@ export const HcxStatus = [
   interface StatusResponseObject {
     sender_code: string;
     recipient_code: string;
-    entity_type: 'coverageeligibility' | 'predetermination' | 'preauth' | 'claim' | 'task' | 'payment' | 'insuranceplan';
+    entity_type: 'coverageeligibility' | 'predetermination' | 'preauth' | 'claim' | 'task' | 'payment' | 'insuranceplan' | 'communication';
     protocol_status: 'request.queued' | 'request.error' | 'request.dispatched';
   }
   
