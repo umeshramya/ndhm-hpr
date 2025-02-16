@@ -57,8 +57,10 @@ const send= async () =>{
      */
 
 
-    let encrypted = encrypt("9343403620", publicKey)
+    let encrypted = encrypt("", publicKey)
     console.log(encrypted)
+
+    return
 
 //    encrypted =`CsTrUH18wLv5sGtCWgNAaUZL+mXbPCLA/TUWxRV8nm5qz+hnpLTttlvLHrlCDzvYwQLMW4htmptXTkbbGCfCnZchB+i8xavYtrA8wKv2vfSv4myTdfX5phCvX5/47eiMJoK/KtgaIL/JvfrijjUYq8abiUjNhzhgdOHbrmX4U5qyjFPd6yCSj1qfce0QGSFul/woYMR28jHtD97cjK5CpYxJEdLhMHjqUANi2BWGSsQUoeik60a6LPHX9NOLkCsZJ02ehHa+tMzG0FE8n09rsAo3nOwWeQxBMMEmdY1iwyh2vV1UNrIckA9R/jhMFkpRl1Gbd1QO5Zr60Il6gqFejITc+IOw7EiZwMYC9TGBUse5HmRBbsm6mnjUnjVxk0Y5qwzlxLJkMvVtg+RjtJAMzrn+vMe586dDfe14s6apVFsUkJ5bOSjpZhaumgFrh/9KEUPxO7kz8Nt7x5drlPZW9FOPEOYejh69s6yWNBWlhjvR3fxgoPZMeLl8ddFIIwWdiq98G0jxRb3cTFI4XZ80enJcesJehcJyViVcyGvPS4jdGBZrb96exYt1DRt+qMIoyLnjIHEAjc5ha3dy/9DCjY3WFGW33uOnV28Un9zUSVxXd/4j/hOoDEpm1yTbqqrLXOXo92/fcV2kZ+Hmg3Se3qR/kGBZxnsfz0pEwUVZsNo=`
 

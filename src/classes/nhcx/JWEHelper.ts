@@ -19,7 +19,8 @@ export default class JWEHelper {
       // keyData = await (await axios.default.get(cert)).data;
     }
 
-    if (!(keyData && options.headers && options.payload)) throw new Error("Invalid Input");
+    // if (!(keyData && options.headers && options.payload)) throw new Error("Invalid Input");
+    if (!(keyData && options.headers )) throw new Error("Invalid Input");
     let key = await JWK.asKey(keyData, "pem");
     const buffer = Buffer.from(JSON.stringify(options.payload));
     const fields = { alg : "RSA-OAEP-256", ...options.headers };
